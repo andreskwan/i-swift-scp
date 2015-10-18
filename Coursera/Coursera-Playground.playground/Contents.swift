@@ -130,3 +130,82 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
 }
 
 // 9:50/25:25 Implicitly unwrapped optional
+// "!" used when
+// - I get a value from Objective-C - everything is a pointer/optional nil/obj
+// always going to be an optional
+// obj-C returns something as an optional
+// but I don't want to deal with it as an optional 
+// then I unwrap it, no matter what
+// useful in interfaces
+
+var mostLikelystring: String! = "Hey"
+mostLikelystring.characters.count //unwrapped used as it wasn't an optional 
+
+// 14:33/25:25 Optional chaining 
+
+class CupHolder {
+    var cups:[String]?
+}
+
+class Car {
+    var cupHolders:CupHolder?
+}
+
+let niceCar = Car()
+niceCar.cupHolders = CupHolder()
+niceCar.cupHolders?.cups
+
+// this is annoying
+if var cupHolder = niceCar.cupHolders { //validate if cupHolders is nil
+    if var cups = cupHolder.cups { //validate if cups is nil
+        //change
+        cups.append("Ginger Ale")
+    } else {
+        //assign
+        niceCar.cupHolders?.cups = ["Milk", "Watter"]
+    }
+}
+
+// what we want is something like this
+// if statements are replaced by "?"
+niceCar.cupHolders?.cups?.append("Ginger Ale")
+let firstCup = niceCar.cupHolders?.cups?[0]
+
+//w3 Closures
+//named function
+func performMagic(thingy: String) -> String {
+    return thingy
+}
+
+let magicFunction = performMagic
+magicFunction("Abra Cadabra")
+
+//anonymous definition
+let newMagicFuntion = {
+    (thingy:String) -> String in
+    return thingy
+}
+
+let magicFunctionReturn = performMagic("Spell")
+
+func printMagic(thingy: String) {
+    print(thingy)
+}
+
+let magicPrintFunction = printMagic
+
+let printFunctionReturn = printMagic("Spell")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
