@@ -2,13 +2,14 @@
 
 import Foundation
 import UIKit
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Week 2
 ////////////////////////////////////////////////////////////////////////////////////
 //w2.1 Playground
 // see optionals w3.1
 
-//w2.2 Control flow
+//w2.2 Control flow - intervals - guard
 for i in 0..<10{
     //guard as a break 
     //guard as a assert
@@ -91,6 +92,7 @@ let arrayTwo = [1,2,3.5,4]
 //let arrayThree:[Int] = [1,2,3.5,4]
 let arrayFour:[Int] = []
 let arrayFive = [Int]()
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Week 3 Advanced Swift 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -100,18 +102,20 @@ let arrayFive = [Int]()
 // when you access a value but it doesn't exits the program crashes
 // because instead a value you get a nil pointer
 //
-// 1) "!" it was nil & still could be!
+// 1) "!" it was nil & still could be!, unwrap automatically
 //    - used when we know it's going to be nil at the begining
 // like a property 
-// 2) "?" is it nil?
+// 2) "?" is it nil? is an optional, unwrap yourself
 var str: String? = nil //it is nil at the begining
 str
 str?.characters.count //this means "is str nil?" do not force unwrap - it is safe
 
+// safe unwrapping 
 if (str != nil) { //make it safe
     str!.characters.count //this means "str is not nil! unwrap it"
                           //! force unwrap - if unwrap an it is nil - crash
 }
+
 // Optional binding
 //str = "Hello"
 if let definitelyString = str {
