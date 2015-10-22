@@ -6,6 +6,21 @@ import UIKit
 ////////////////////////////////////////////////////////////////////////////////////
 // Week 2
 ////////////////////////////////////////////////////////////////////////////////////
+// swift tour - book
+// let and var
+let kLabel = "the width is "
+let kWidth = 90
+// casting to string
+let kWidthLabel = kLabel + String(kWidth)
+
+// String formating
+let kotherConstant = "\(kLabel) \(kWidth)"
+
+let kDouble = 90.0
+let kSecondDouble = 88.0
+// String and operation
+let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
+
 //w2.1 Playground
 // see optionals w3.1
 
@@ -25,6 +40,23 @@ var animals = ["dog", "cat", "bird"]
 var cuteness = ["dog": "funny",
                 "cat": "very cute",
                "bird": "amazing"];
+//Dictionary 
+//- add key value
+cuteness["Panda"]="Extra cute"
+cuteness
+
+//Create empty arrays or dictionaries
+let emptyArray = [String]()
+let emptyDictionary = [String:Float]()
+emptyArray
+emptyDictionary
+
+let emptyArray2:[String]
+let emptyDictionary2:[String:Float]
+
+// an alterntive when type information can be inferred
+emptyArray2 = []
+emptyDictionary2 = [:]
 
 //w2. Functions
 let gramInOunces:Float = 0.035274
