@@ -13,17 +13,21 @@ let kWidth = 90
 // casting to string
 let kWidthLabel = kLabel + String(kWidth)
 
+///////////////////////////////////////////
 // String formating
 let kotherConstant = "\(kLabel) \(kWidth)"
 
 let kDouble = 90.0
 let kSecondDouble = 88.0
+///////////////////////////////////////////
 // String and operation
 let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
 
+///////////////////////////////////////////
 //w2.1 Playground
 // see optionals w3.1
 
+///////////////////////////////////////////
 //w2.2 Control flow - intervals - guard
 for i in 0..<10{
     //guard as a break 
@@ -34,17 +38,27 @@ for i in 0..<10{
     }
 }
 
+
+///////////////////////////////////////////
 //w2.3 Arrays & Dictionaries 
 var animals = ["dog", "cat", "bird"]
+
+let array = [1,2,3]
+//dropFirst(array)
+array.dropFirst()
+//abs(-1)
+
 
 var cuteness = ["dog": "funny",
                 "cat": "very cute",
                "bird": "amazing"];
+///////////////////////////////////////////
 //Dictionary 
 //- add key value
 cuteness["Panda"]="Extra cute"
 cuteness
 
+///////////////////////////////////////////
 //Create empty arrays or dictionaries
 let emptyArray = [String]()
 let emptyDictionary = [String:Float]()
@@ -58,6 +72,7 @@ let emptyDictionary2:[String:Float]
 emptyArray2 = []
 emptyDictionary2 = [:]
 
+///////////////////////////////////////////
 //w2. Functions
 let gramInOunces:Float = 0.035274
 
@@ -69,9 +84,13 @@ func ouncesToGrams(ounces: Float = 0) -> Float
 
 ouncesToGrams(1)
 
+///////////////////////////////////////////
 // w2.1.2 Functions & switch 
 
-// w2.2 Arrays & For(control flow)
+
+///////////////////////////////////////////
+// w2.2 For(control flow)
+
 for i in 0...3{
     print(i)
 }
@@ -83,6 +102,24 @@ for i in 0..<3{
 var beatifulImage = [[200,3,100],[100,200,4],[25,6,100]]
 print(beatifulImage)
 
+let interestingNumbers = [
+    "Prime": [2, 3, 5, 7, 11, 13],
+    "Fibonacci": [1, 1, 2, 3, 5, 8],
+    "Square": [1, 4, 9, 16, 25],
+]
+
+var largest = 0
+var kind = ""
+
+for (kind, numbers) in interestingNumbers {
+    
+    for number in numbers {
+        if number > largest {
+            largest = number
+        }
+    }
+}
+///////////////////////////////////////////
 // w2.2.1 inouts and references
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
@@ -94,10 +131,23 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     }
 }
 riseLowerValues(&beatifulImage, value: 50)
-//let array = [1,2,3]
-////dropFirst(array)
-//array.dropFirst()
-//abs(-1)
+
+///////////////////////////////////////////
+// switch case 
+var vegetable = "red pepper"
+//vegetable = "cucumber"
+//vegetable = "watercress"
+
+switch vegetable {
+    case "celery":
+        print("celery case")
+    case "cucumber", "watercress":
+        print("cucu and water")
+    case let x where x.hasSuffix("pepper"):
+        print("Is it a spicy \(x)")
+    default:
+        print("Everything taste good in soup")
+}
 
 //Quiz w2
 //p2.1
@@ -130,6 +180,7 @@ let arrayFive = [Int]()
 ////////////////////////////////////////////////////////////////////////////////////
 
 // w3.1 Optionals
+// an optional value either contains a value or contains nil.
 // problem that they are trying to solve is
 // when you access a value but it doesn't exits the program crashes
 // because instead a value you get a nil pointer
@@ -141,6 +192,7 @@ let arrayFive = [Int]()
 var str: String? = nil //it is nil at the begining
 str
 str?.characters.count //this means "is str nil?" do not force unwrap - it is safe
+print(str == nil)
 
 // safe unwrapping 
 if (str != nil) { //make it safe
