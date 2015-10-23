@@ -47,23 +47,53 @@ for i in 0..<10{
 
 
 ///////////////////////////////////////////
-//w2.3 Arrays & Dictionaries 
+//w2.3 Collections - Arrays & Dictionaries - or Generics
+// all collections are "value type" - duplication if inout not used
+
+///////////////////////////////////////////
+// Arrays
+var numbers = Array<Int>(count: 5, repeatedValue: 3)
+var numbers2 = [Int](count: 3, repeatedValue: 8)
+var concatenatedArray = numbers + numbers2
+var sequenceArray = [Int](0...5)
+
 var animals = ["dog", "cat", "bird"]
 
 let array = [1,2,3]
 //dropFirst(array)
 array.dropFirst()
+sequenceArray.dropLast(3)//last three elements
 //abs(-1)
 
 
-var cuteness = ["dog": "funny",
-                "cat": "very cute",
-               "bird": "amazing"];
+
 ///////////////////////////////////////////
-//Dictionary 
+// Dictionaries
 //- add key value
+
+var cuteness = ["dog": "funny",
+    "cat": "very cute",
+    "bird": "amazing"];
+
 cuteness["Panda"]="Extra cute"
 cuteness
+
+var namesOfIntegers: [String: Int] = ["One": 1 ,"Two": 2,"Three": 3]
+
+///////////////////////////////////////////
+// Dictionaries and optionals
+// Because it is possible to request a key for which no value exists, a dictionary’s
+// subscript returns an optional value of the dictionary’s value type.
+
+namesOfIntegers["Four"]   //return "nil"
+namesOfIntegers["Four"] = 4
+namesOfIntegers
+namesOfIntegers.updateValue(8, forKey: "Eight")//create the key:value
+namesOfIntegers
+namesOfIntegers.updateValue(8, forKey: "Four")//update the value of the key
+namesOfIntegers
+namesOfIntegers.removeValueForKey("Ten")
+namesOfIntegers
 
 ///////////////////////////////////////////
 //Create empty arrays or dictionaries
@@ -166,6 +196,20 @@ let statistics = calculateStatistics(interestingNumbers["Fibonacci"]!)
 print(statistics.min)
 print(statistics.max)
 print(statistics.sum)
+
+var coordinates = (54.2667,8.4833)
+let (lat,_) = coordinates //just extract the latitud
+print("latitud is \(lat)")
+
+var coordinates2 = (lat: 54.2667,lon: 8.4833)
+print("latitud is \(coordinates2.lat)")
+
+///////////////////////////////////////////
+// Type aliases 
+// define an alternative name for an existing type 
+typealias AudioSample = UInt16
+var maxAmplitudeFound = AudioSample.min
+
 
 ///////////////////////////////////////////
 // functions - variable number of arguments
@@ -272,7 +316,9 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
 // then I unwrap it, no matter what
 // useful in interfaces
 
-var mostLikelystring: String! = "Hey"
+
+var mostLikelystring: String! //only nil at when declared = "Hey"
+mostLikelystring = "This is a string"
 mostLikelystring.characters.count //unwrapped used as it wasn't an optional 
 
 // 14:33/25:25 Optional chaining 
