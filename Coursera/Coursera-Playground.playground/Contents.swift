@@ -8,13 +8,20 @@ import UIKit
 ////////////////////////////////////////////////////////////////////////////////////
 // swift tour - book
 // let and var
-let kLabel = "the width is "
-let kWidth = 90
-// casting to string
-let kWidthLabel = kLabel + String(kWidth)
 
 ///////////////////////////////////////////
-// String formating
+// type inference
+let kLabel = "the width is "
+let kWidth = 90
+
+///////////////////////////////////////////
+// type annotation
+// casting to string
+let kWidthLabel: String = kLabel + String(kWidth)
+
+
+///////////////////////////////////////////
+// String interpolation formating
 let kotherConstant = "\(kLabel) \(kWidth)"
 
 let kDouble = 90.0
@@ -102,25 +109,29 @@ for i in 0..<3{
 var beatifulImage = [[200,3,100],[100,200,4],[25,6,100]]
 print(beatifulImage)
 
-let interestingNumbers = [
+let interestingNumbers: [String:[Int]] = [
     "Prime": [2, 3, 5, 7, 11, 13],
     "Fibonacci": [1, 1, 2, 3, 5, 8],
     "Square": [1, 4, 9, 16, 25],
 ]
 
 var largest = 0
-var kind = ""
+var actualKind = ""
 
 for (kind, numbers) in interestingNumbers {
-    
+    actualKind = kind
     for number in numbers {
         if number > largest {
             largest = number
         }
     }
 }
+// Print
+print("largest value: \(largest) belongs to the kind: \(actualKind)")
+print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"----", terminator:"**--**")
+
 ///////////////////////////////////////////
-// w2.2.1 inouts and references
+// w2.2.1 functions - inouts and references
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
         for j in 0 ..< imageMatrix[i].count {//how many elements in the i array
@@ -131,6 +142,35 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     }
 }
 riseLowerValues(&beatifulImage, value: 50)
+
+///////////////////////////////////////////
+// functions - Tuples - compound values - return multiple values
+func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+    
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        sum += score
+    }
+    return (min, max, sum)
+}
+
+let statistics = calculateStatistics(interestingNumbers["Fibonacci"]!)
+// expected output: (.0 1, .1 8, .2 20)
+print(statistics.min)
+print(statistics.max)
+print(statistics.sum)
+
+///////////////////////////////////////////
+// functions - variable number of arguments
+
+
 
 ///////////////////////////////////////////
 // switch case 
@@ -179,16 +219,22 @@ let arrayFive = [Int]()
 // Week 3 Advanced Swift 
 ////////////////////////////////////////////////////////////////////////////////////
 
-// w3.1 Optionals
-// an optional value either contains a value or contains nil.
-// problem that they are trying to solve is
+// w3.1 Optional types - swift is a type safe language
+// - Similar to using "nil" with pointers in Objective-c,
+// - They work for any type, not just classes
+// - an optional value either contains a value or contains nil.
+//
+// Problem that they are trying to solve is
 // when you access a value but it doesn't exits the program crashes
 // because instead a value you get a nil pointer
 //
-// 1) "!" it was nil & still could be!, unwrap automatically
+// 1) "!" it brings a value, unwrap automatically
+//    - could fail if value is nil and we are not prepare
 //    - used when we know it's going to be nil at the begining
 // like a property 
-// 2) "?" is it nil? is an optional, unwrap yourself
+// 2) "?" we don't know, so unwrap manually (is it nil? is an optional, unwrap yourself)
+//    - f value is nil, just keep going 
+
 var str: String? = nil //it is nil at the begining
 str
 str?.characters.count //this means "is str nil?" do not force unwrap - it is safe
