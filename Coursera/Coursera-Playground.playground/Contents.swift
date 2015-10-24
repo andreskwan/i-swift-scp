@@ -234,7 +234,9 @@ func printMagic(thingy: String) {
 
 let magicPrintFunction = printMagic
 
-let printFunctionReturn = printMagic("Spell")
+let printFunctionReturn() = printMagic("Spell")
+printFunctionReturn
+
 
 ///////////////////////////////////////////
 // functions - variable number of arguments
