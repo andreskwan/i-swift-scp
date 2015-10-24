@@ -19,6 +19,11 @@ let kWidth = 90
 // casting to string
 let kWidthLabel: String = kLabel + String(kWidth)
 
+///////////////////////////////////////////
+// Type aliases
+// define an alternative name for an existing type
+typealias AudioSample = UInt16
+var maxAmplitudeFound = AudioSample.min
 
 ///////////////////////////////////////////
 // String interpolation formating
@@ -26,8 +31,9 @@ let kotherConstant = "\(kLabel) \(kWidth)"
 
 let kDouble = 90.0
 let kSecondDouble = 88.0
+
 ///////////////////////////////////////////
-// String and operation
+// String and operations
 let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
 
 ///////////////////////////////////////////
@@ -54,6 +60,7 @@ for i in 0..<10{
 // Arrays
 var numbers = Array<Int>(count: 5, repeatedValue: 3)
 var numbers2 = [Int](count: 3, repeatedValue: 8)
+
 var concatenatedArray = numbers + numbers2
 var sequenceArray = [Int](0...5)
 
@@ -64,7 +71,6 @@ let array = [1,2,3]
 array.dropFirst()
 sequenceArray.dropLast(3)//last three elements
 //abs(-1)
-
 
 
 ///////////////////////////////////////////
@@ -205,15 +211,33 @@ var coordinates2 = (lat: 54.2667,lon: 8.4833)
 print("latitud is \(coordinates2.lat)")
 
 ///////////////////////////////////////////
-// Type aliases 
-// define an alternative name for an existing type 
-typealias AudioSample = UInt16
-var maxAmplitudeFound = AudioSample.min
+//w3 function - Closures
+//named function
+func performMagic(thingy: String) -> String {
+    return thingy
+}
 
+let magicFunction = performMagic
+magicFunction("Abra Cadabra")
+
+//defining an anonymous function
+let newMagicFuntion = {
+    (thingy:String) -> String in //function signature
+    return thingy
+}
+
+let magicFunctionReturn = performMagic("Spell")
+
+func printMagic(thingy: String) {
+    print(thingy)
+}
+
+let magicPrintFunction = printMagic
+
+let printFunctionReturn = printMagic("Spell")
 
 ///////////////////////////////////////////
 // functions - variable number of arguments
-
 
 
 ///////////////////////////////////////////
@@ -351,30 +375,59 @@ if var cupHolder = niceCar.cupHolders { //validate if cupHolders is nil
 niceCar.cupHolders?.cups?.append("Ginger Ale")
 let firstCup = niceCar.cupHolders?.cups?[0]
 
-//w3 Closures
-//named function
-func performMagic(thingy: String) -> String {
-    return thingy
+
+
+
+// value types - by value by reference
+//by value
+var a = 6
+var b = a
+b = 8
+b
+a
+
+
+struct StructNumber {
+    var n: Int
+    init(n: Int){
+        self.n = n
+    }
+}
+var aStructNum = StructNumber(n: 56)
+var bStructNum = aStructNum
+
+aStructNum.n
+bStructNum.n = 88
+bStructNum.n
+aStructNum.n
+// Structs are not ARC
+
+
+//by reference
+class Number {
+    var n: Int
+    init(n: Int){
+        self.n = n
+    }
 }
 
-let magicFunction = performMagic
-magicFunction("Abra Cadabra")
+var aNumber = Number(n: 8)
+var bNumber = aNumber
 
-//anonymous definition
-let newMagicFuntion = {
-    (thingy:String) -> String in
-    return thingy
-}
+aNumber.n
+bNumber.n = 106
+bNumber.n
+aNumber.n
 
-let magicFunctionReturn = performMagic("Spell")
+//// Inheritance
+//class SupperNumber: NSNumber {
+//    override 
+//}
 
-func printMagic(thingy: String) {
-    print(thingy)
-}
 
-let magicPrintFunction = printMagic
 
-let printFunctionReturn = printMagic("Spell")
+
+
 
 
 
