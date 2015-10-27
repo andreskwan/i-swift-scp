@@ -264,6 +264,18 @@ let arrayFive = [Int]()
 ////////////////////////////////////////////////////////////////////////////////////
 
 // w3.1 Optional types - swift is a type safe language
+//
+// Optional is a type, is defined as a enum 
+// because "enum" can have associated values
+//
+// enum Optional{
+//    case None
+//    case Some(T)
+//}
+//
+// Swift - nil is the absence of a value, not a pointer
+// Objective-C nil is a pointer to a nonexistent object
+//
 // - Similar to using "nil" with pointers in Objective-c,
 // - They work for any type, not just classes
 // - an optional value either contains a value or contains nil.
