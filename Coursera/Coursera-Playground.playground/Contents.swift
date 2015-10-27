@@ -117,11 +117,17 @@ emptyDictionary2 = [:]
 
 ///////////////////////////////////////////
 //w2. Functions
-let gramInOunces:Float = 0.035274
+///////////////////////////////////////////
+// functions - Parameters
+// let - parameters are constants by default
+// var - value type - parameters are copies and can be modified
+// inout - reference type - parameters passed by reference - is the value - take care
 
+///////////////////////////////////////////
+// functions - Default parameter values
+let gramInOunces:Float = 0.035274
 func ouncesToGrams(ounces: Float = 0) -> Float
 {
-    
     return Float(ounces)/Float(gramInOunces)
 }
 
@@ -145,6 +151,8 @@ for i in 0..<3{
 var beatifulImage = [[200,3,100],[100,200,4],[25,6,100]]
 print(beatifulImage)
 
+///////////////////////////////////////////
+// For - Iterating a dictionary
 let interestingNumbers: [String:[Int]] = [
     "Prime": [2, 3, 5, 7, 11, 13],
     "Fibonacci": [1, 1, 2, 3, 5, 8],
@@ -154,6 +162,7 @@ let interestingNumbers: [String:[Int]] = [
 var largest = 0
 var actualKind = ""
 
+//each item in the dictionary is returned as a (key,value) tuple
 for (kind, numbers) in interestingNumbers {
     actualKind = kind
     for number in numbers {
@@ -180,7 +189,7 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
 riseLowerValues(&beatifulImage, value: 50)
 
 ///////////////////////////////////////////
-// functions - Tuples - compound values - return multiple values
+// functions - return multiple values - Tuples - compound values
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
@@ -220,6 +229,7 @@ func performMagic(thingy: String) -> String {
 let magicFunction = performMagic
 magicFunction("Abra Cadabra")
 
+///////////////////////////////////////////
 //defining an anonymous function
 let newMagicFuntion = {
     (thingy:String) -> String in //function signature
@@ -234,9 +244,8 @@ func printMagic(thingy: String) {
 
 let magicPrintFunction = printMagic
 
-let printFunctionReturn() = printMagic("Spell")
-printFunctionReturn
-
+//let printFunctionReturn() = printMagic("Spell")
+//printFunctionReturn
 
 ///////////////////////////////////////////
 // functions - variable number of arguments
@@ -244,16 +253,19 @@ printFunctionReturn
 
 ///////////////////////////////////////////
 // switch case 
+// "patter matching"
+// - we can match aginst integers, strings, a range, a tuple, or an enumeration. 
+
 var vegetable = "red pepper"
 //vegetable = "cucumber"
 //vegetable = "watercress"
 
 switch vegetable {
-    case "celery":
+    case "celery":                         //pm - string
         print("celery case")
-    case "cucumber", "watercress":
+    case "cucumber", "watercress":         //pm -
         print("cucu and water")
-    case let x where x.hasSuffix("pepper"):
+    case let x where x.hasSuffix("pepper")://pm -
         print("Is it a spicy \(x)")
     default:
         print("Everything taste good in soup")
@@ -310,12 +322,15 @@ str
 str?.characters.count //this means "is str nil?" do not force unwrap - it is safe
 print(str == nil)
 
+///////////////////////////////////////////
+// Fourced Unwrapping
 // safe unwrapping 
 if (str != nil) { //make it safe
     str!.characters.count //this means "str is not nil! unwrap it"
                           //! force unwrap - if unwrap an it is nil - crash
 }
 
+///////////////////////////////////////////
 // Optional binding
 //str = "Hello"
 if let definitelyString = str {
@@ -324,6 +339,7 @@ if let definitelyString = str {
     print("str is nil!")
 }
 
+///////////////////////////////////////////
 // Optional binding and guard as assertion 
 func testingOptionalBindingWithGuard(maybeString: String?) -> String
 {
@@ -333,17 +349,21 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
     return definitelyString
 }
 
+///////////////////////////////////////////
 // 9:50/25:25 Implicitly unwrapped optional
 // "!" used when
 // - I get a value from Objective-C - everything is a pointer/optional nil/obj
 // always going to be an optional
 // obj-C returns something as an optional
 // but I don't want to deal with it as an optional 
-// then I unwrap it, no matter what
-// useful in interfaces
+// then I unwrap it, no matter what (I need to know what it is)
+//
+// useful in interfaces (known to be bound)
+// @IBOutlet weak var tableView: UITableView!
 
 
 var mostLikelystring: String! //only nil at when declared = "Hey"
+// from here I don't neet to do an optional binding or force unwrapping
 mostLikelystring = "This is a string"
 mostLikelystring.characters.count //unwrapped used as it wasn't an optional 
 
@@ -379,7 +399,7 @@ let firstCup = niceCar.cupHolders?.cups?[0]
 
 
 
-
+///////////////////////////////////////////
 // value types - by value by reference
 //by value
 var a = 6
@@ -404,7 +424,7 @@ bStructNum.n
 aStructNum.n
 // Structs are not ARC
 
-
+///////////////////////////////////////////
 //by reference
 class Number {
     var n: Int
@@ -426,20 +446,142 @@ aNumber.n
 //    override 
 //}
 
+///////////////////////////////////////////
+// String vs NSString
+//var nsstring: NSString = "\U0001F496"
+//var string: String = "\U0001F496"
+//
+//nsstring.length
+//string.characters.count
+
+///////////////////////////////////////////
+// Enumerations
+
+enum CompassPoint
+{
+    case North
+    case South
+    case East
+    case West
+}
+
+var directionToHead = CompassPoint.East //type CompassPoint
+directionToHead = .North //type inferred, then use short syntax 
+
+///////////////////////////////////////////
+//Enumeratons and optionals
+
+enum Optional
+{
+    //can store associated values of any given type
+    //value types can be different for each case
+    case None
+    case SomeSpecificType(type:String)
+}
+
+enum Result
+{
+    case Success(Int)
+    case Error(Int, String)
+}
+
+let success = Result.Success(5)
+let error = Result.Error(0, "You miss it!")
+
+///////////////////////////////////////////
+// Enum - raw values - associated values
+// each raw value should be unique
+enum Suit: String
+{
+    case Heart = "H"
+    case Diamond = "d"
+    case Spade = "s"
+    case Club = "c"
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+//enum SomePlanetarySystems : String
+//{
+//    case Solar = "Solar"
+//    case Gliese = "Gliese 876"
+//    case Cancri = "55 Cancri"
+//    case Kepler = "Kepler-42"
+//}
+//
+//let solar = SomePlanetarySystems.Solar
+//func useEnum(planetary:SomePlanetarySystems) -> String
+//{
+//    switch planetary {
+//        case .Cancri:
+//            return "Cancri, I don't know nothing about it"
+//        case .Solar:
+//            return "Solar, where I live"
+//        default:
+//            return "no solar system"
+//    }
+//}
+//
+//useEnum(SomePlanetarySystems.Cancri)
+//
+//let solarSystemPlanets: Dictionary = [
+//    "Mercury": "A very hot planet, closest to the sun.",
+//    "Venus": "It's very cloudy here!",
+//    "Earth": "There is something very familiar about this planet.",
+//    "Mars": "Known as the red planet.",
+//    "Jupiter": "A gas giant, with a noticeable red spot.",
+//    "Saturn": "This planet has beautiful rings around it.",
+//    "Uranus": "Strangely, this planet rotates around on its side.",
+//    "Neptune": "A very cold planet, furthest from the sun."
+//]
+//
+//struct Planet {
+//    var name: String!
+//    var description: String!
+//    
+//    init(name:String, description:String)
+//    {
+//        self.name = name
+//        self.description = description
+//    }
+//}
+//
+//var planets:[Planet] = []
+//
+//for (planetName,description) in solarSystemPlanets {
+//    planets.append(Planet(name: planetName, description: description))
+//}
+//
+//class PlanetarySystem {
+//    var planets: [Planet] = []
+//    var name: String = ""
+//    
+//    init(planetaySystemName:SomePlanetarySystems)
+//        {
+//         
+//            switch planetaySystemName {
+//                case .Solar:
+//                    name = planetaySystemName.rawValue
+//                    planets = setArrayOfPlanets(solarSystemPlanets, planetarySystemName: .Solar)
+//                case .Gliese:
+//                    self.planets = []
+//                case .Cancri:
+//                    self.planets = []
+//                case .Kepler:
+//                    self.planets = []
+//            }
+//        }
+//    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+//    {
+//        var planets: [Planet]!
+//        for (planetName,description) in solarSystemPlanets {
+//            planets.append(Planet(name: planetName, description: description))
+//        }
+//        return planets
+//    }
+//}
+//
+//let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
+//
 
 
 

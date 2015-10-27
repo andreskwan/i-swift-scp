@@ -11,7 +11,7 @@ struct Meme {
     var memedImage: UIImage
 }
 
-let meme = Meme(
+//let meme = Meme(
 
 
 struct TodoItem {
