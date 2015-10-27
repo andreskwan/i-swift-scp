@@ -19,6 +19,11 @@ let kWidth = 90
 // casting to string
 let kWidthLabel: String = kLabel + String(kWidth)
 
+///////////////////////////////////////////
+// Type aliases
+// define an alternative name for an existing type
+typealias AudioSample = UInt16
+var maxAmplitudeFound = AudioSample.min
 
 ///////////////////////////////////////////
 // String interpolation formating
@@ -26,8 +31,9 @@ let kotherConstant = "\(kLabel) \(kWidth)"
 
 let kDouble = 90.0
 let kSecondDouble = 88.0
+
 ///////////////////////////////////////////
-// String and operation
+// String and operations
 let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
 
 ///////////////////////////////////////////
@@ -54,6 +60,7 @@ for i in 0..<10{
 // Arrays
 var numbers = Array<Int>(count: 5, repeatedValue: 3)
 var numbers2 = [Int](count: 3, repeatedValue: 8)
+
 var concatenatedArray = numbers + numbers2
 var sequenceArray = [Int](0...5)
 
@@ -64,7 +71,6 @@ let array = [1,2,3]
 array.dropFirst()
 sequenceArray.dropLast(3)//last three elements
 //abs(-1)
-
 
 
 ///////////////////////////////////////////
@@ -111,11 +117,17 @@ emptyDictionary2 = [:]
 
 ///////////////////////////////////////////
 //w2. Functions
-let gramInOunces:Float = 0.035274
+///////////////////////////////////////////
+// functions - Parameters
+// let - parameters are constants by default
+// var - value type - parameters are copies and can be modified
+// inout - reference type - parameters passed by reference - is the value - take care
 
+///////////////////////////////////////////
+// functions - Default parameter values
+let gramInOunces:Float = 0.035274
 func ouncesToGrams(ounces: Float = 0) -> Float
 {
-    
     return Float(ounces)/Float(gramInOunces)
 }
 
@@ -139,6 +151,8 @@ for i in 0..<3{
 var beatifulImage = [[200,3,100],[100,200,4],[25,6,100]]
 print(beatifulImage)
 
+///////////////////////////////////////////
+// For - Iterating a dictionary
 let interestingNumbers: [String:[Int]] = [
     "Prime": [2, 3, 5, 7, 11, 13],
     "Fibonacci": [1, 1, 2, 3, 5, 8],
@@ -148,6 +162,7 @@ let interestingNumbers: [String:[Int]] = [
 var largest = 0
 var actualKind = ""
 
+//each item in the dictionary is returned as a (key,value) tuple
 for (kind, numbers) in interestingNumbers {
     actualKind = kind
     for number in numbers {
@@ -174,7 +189,7 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
 riseLowerValues(&beatifulImage, value: 50)
 
 ///////////////////////////////////////////
-// functions - Tuples - compound values - return multiple values
+// functions - return multiple values - Tuples - compound values
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
@@ -205,29 +220,52 @@ var coordinates2 = (lat: 54.2667,lon: 8.4833)
 print("latitud is \(coordinates2.lat)")
 
 ///////////////////////////////////////////
-// Type aliases 
-// define an alternative name for an existing type 
-typealias AudioSample = UInt16
-var maxAmplitudeFound = AudioSample.min
+//w3 function - Closures
+//named function
+func performMagic(thingy: String) -> String {
+    return thingy
+}
 
+let magicFunction = performMagic
+magicFunction("Abra Cadabra")
+
+///////////////////////////////////////////
+//defining an anonymous function
+let newMagicFuntion = {
+    (thingy:String) -> String in //function signature
+    return thingy
+}
+
+let magicFunctionReturn = performMagic("Spell")
+
+func printMagic(thingy: String) {
+    print(thingy)
+}
+
+let magicPrintFunction = printMagic
+
+//let printFunctionReturn() = printMagic("Spell")
+//printFunctionReturn
 
 ///////////////////////////////////////////
 // functions - variable number of arguments
 
 
-
 ///////////////////////////////////////////
 // switch case 
+// "patter matching"
+// - we can match aginst integers, strings, a range, a tuple, or an enumeration. 
+
 var vegetable = "red pepper"
 //vegetable = "cucumber"
 //vegetable = "watercress"
 
 switch vegetable {
-    case "celery":
+    case "celery":                         //pm - string
         print("celery case")
-    case "cucumber", "watercress":
+    case "cucumber", "watercress":         //pm -
         print("cucu and water")
-    case let x where x.hasSuffix("pepper"):
+    case let x where x.hasSuffix("pepper")://pm -
         print("Is it a spicy \(x)")
     default:
         print("Everything taste good in soup")
@@ -296,12 +334,15 @@ str
 str?.characters.count //this means "is str nil?" do not force unwrap - it is safe
 print(str == nil)
 
+///////////////////////////////////////////
+// Fourced Unwrapping
 // safe unwrapping 
 if (str != nil) { //make it safe
     str!.characters.count //this means "str is not nil! unwrap it"
                           //! force unwrap - if unwrap an it is nil - crash
 }
 
+///////////////////////////////////////////
 // Optional binding
 //str = "Hello"
 if let definitelyString = str {
@@ -310,6 +351,7 @@ if let definitelyString = str {
     print("str is nil!")
 }
 
+///////////////////////////////////////////
 // Optional binding and guard as assertion 
 func testingOptionalBindingWithGuard(maybeString: String?) -> String
 {
@@ -319,17 +361,21 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
     return definitelyString
 }
 
+///////////////////////////////////////////
 // 9:50/25:25 Implicitly unwrapped optional
 // "!" used when
 // - I get a value from Objective-C - everything is a pointer/optional nil/obj
 // always going to be an optional
 // obj-C returns something as an optional
 // but I don't want to deal with it as an optional 
-// then I unwrap it, no matter what
-// useful in interfaces
+// then I unwrap it, no matter what (I need to know what it is)
+//
+// useful in interfaces (known to be bound)
+// @IBOutlet weak var tableView: UITableView!
 
 
 var mostLikelystring: String! //only nil at when declared = "Hey"
+// from here I don't neet to do an optional binding or force unwrapping
 mostLikelystring = "This is a string"
 mostLikelystring.characters.count //unwrapped used as it wasn't an optional 
 
@@ -363,41 +409,105 @@ if var cupHolder = niceCar.cupHolders { //validate if cupHolders is nil
 niceCar.cupHolders?.cups?.append("Ginger Ale")
 let firstCup = niceCar.cupHolders?.cups?[0]
 
-//w3 Closures
-//named function
-func performMagic(thingy: String) -> String {
-    return thingy
+
+
+///////////////////////////////////////////
+// value types - by value by reference
+//by value
+var a = 6
+var b = a
+b = 8
+b
+a
+
+
+struct StructNumber {
+    var n: Int
+    init(n: Int){
+        self.n = n
+    }
+}
+var aStructNum = StructNumber(n: 56)
+var bStructNum = aStructNum
+
+aStructNum.n
+bStructNum.n = 88
+bStructNum.n
+aStructNum.n
+// Structs are not ARC
+
+///////////////////////////////////////////
+//by reference
+class Number {
+    var n: Int
+    init(n: Int){
+        self.n = n
+    }
 }
 
-let magicFunction = performMagic
-magicFunction("Abra Cadabra")
+var aNumber = Number(n: 8)
+var bNumber = aNumber
 
-//anonymous definition
-let newMagicFuntion = {
-    (thingy:String) -> String in
-    return thingy
+aNumber.n
+bNumber.n = 106
+bNumber.n
+aNumber.n
+
+//// Inheritance
+//class SupperNumber: NSNumber {
+//    override 
+//}
+
+///////////////////////////////////////////
+// String vs NSString
+//var nsstring: NSString = "\U0001F496"
+//var string: String = "\U0001F496"
+//
+//nsstring.length
+//string.characters.count
+
+///////////////////////////////////////////
+// Enumerations
+
+enum CompassPoint
+{
+    case North
+    case South
+    case East
+    case West
 }
 
-let magicFunctionReturn = performMagic("Spell")
+var directionToHead = CompassPoint.East //type CompassPoint
+directionToHead = .North //type inferred, then use short syntax 
 
-func printMagic(thingy: String) {
-    print(thingy)
+///////////////////////////////////////////
+//Enumeratons and optionals
+
+enum Optional
+{
+    //can store associated values of any given type
+    //value types can be different for each case
+    case None
+    case SomeSpecificType(type:String)
 }
 
-let magicPrintFunction = printMagic
+enum Result
+{
+    case Success(Int)
+    case Error(Int, String)
+}
 
-let printFunctionReturn = printMagic("Spell")
+let success = Result.Success(5)
+let error = Result.Error(0, "You miss it!")
 
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////
+// Enum - raw values - associated values
+// each raw value should be unique
+enum Suit: String
+{
+    case Heart = "H"
+    case Diamond = "d"
+    case Spade = "s"
+    case Club = "c"
+}
 
