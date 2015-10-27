@@ -16,7 +16,7 @@ enum SomePlanetarySystems : String
     case Kepler = "Kepler-42"
 }
 
-let SolarSytem: Dictionary = [
+let solarSystemPlanets: Dictionary = [
     "Mercury": "A very hot planet, closest to the sun.",
     "Venus": "It's very cloudy here!",
     "Earth": "There is something very familiar about this planet.",
@@ -27,25 +27,36 @@ let SolarSytem: Dictionary = [
     "Neptune": "A very cold planet, furthest from the sun."
 ]
 
-
 class PlanetarySystem {
     var planets: [Planet] = []
     var name: String = ""
     
-////    var planetarySystem: SomePlanetarySystems
-//    
-//    init(planets:[Planets],name:String,planetaySystemName:SomePlanetarySystems)
-//    {
-//        self.name = name
-//        switch planetarySystemName {
-//            case .Solar:
-//                self.planets = []
-//            case .Gliese:
-//                self.planets = []
-//            case .Cancri:
-//                self.planets = []
-//            case .Kepler:
-//        }()
-//        
-//    }
+    init(planetaySystemName:SomePlanetarySystems)
+    {
+        switch planetaySystemName {
+            case .Solar:
+                name = planetaySystemName.rawValue
+                planets = setArrayOfPlanets(solarSystemPlanets, planetarySystemName: .Solar)
+            case .Gliese:
+                self.planets = []
+            case .Cancri:
+                self.planets = []
+            case .Kepler:
+                self.planets = []
+        }
+    }
+    
+    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+    {
+        var planets = [Planet]()
+        for (planetName,description) in solarSystemPlanets {
+            planets.append(Planet(name: planetName, description: description))
+        }
+        return planets
+    }
+    
+    func amountOfPlanets() -> Int
+    {
+        return planets.count
+    }
 }
