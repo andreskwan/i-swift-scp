@@ -177,6 +177,7 @@ print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"--
 
 ///////////////////////////////////////////
 // w2.2.1 functions - inouts and references
+// performace - do not copy - pass by reference
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
         for j in 0 ..< imageMatrix[i].count {//how many elements in the i array
@@ -510,4 +511,78 @@ enum Suit: String
     case Spade = "s"
     case Club = "c"
 }
+
+
+struct Planet {
+    var name: String!
+    var description: String!
+    
+    init(name:String, description:String)
+    {
+        self.name = name
+        self.description = description
+    }
+}
+
+
+enum SomePlanetarySystems : String
+{
+    case Solar = "Solar"
+    case Gliese = "Gliese 876"
+    case Cancri = "55 Cancri"
+    case Kepler = "Kepler-42"
+}
+
+let solarSystemPlanets: Dictionary = [
+    "Mercury": "A very hot planet, closest to the sun.",
+    "Venus": "It's very cloudy here!",
+    "Earth": "There is something very familiar about this planet.",
+    "Mars": "Known as the red planet.",
+    "Jupiter": "A gas giant, with a noticeable red spot.",
+    "Saturn": "This planet has beautiful rings around it.",
+    "Uranus": "Strangely, this planet rotates around on its side.",
+    "Neptune": "A very cold planet, furthest from the sun."
+]
+
+class PlanetarySystem {
+    var planets: [Planet] = []
+    var name: String = ""
+    
+    init(planetaySystemName:SomePlanetarySystems)
+    {
+        switch planetaySystemName {
+        case .Solar:
+            name = planetaySystemName.rawValue
+            planets = setArrayOfPlanets(solarSystemPlanets, planetarySystemName: .Solar)
+        case .Gliese:
+            self.planets = []
+        case .Cancri:
+            self.planets = []
+        case .Kepler:
+            self.planets = []
+        }
+    }
+    
+    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+    {
+        var planets = [Planet]()
+        for (planetName,description) in solarSystemPlanets {
+            planets.append(Planet(name: planetName, description: description))
+        }
+        return planets
+    }
+    
+    func amountOfPlanets() -> Int
+    {
+        return planets.count
+    }
+}
+
+//Public and Private 
+let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
+solarSystem.name
+solarSystem.amountOfPlanets()
+solarSystem.planets
+
+//min 32 - mutabilidad
 
