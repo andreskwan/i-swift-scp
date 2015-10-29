@@ -524,7 +524,6 @@ struct Planet {
     }
 }
 
-
 enum SomePlanetarySystems : String
 {
     case Solar = "Solar"
@@ -585,4 +584,30 @@ solarSystem.amountOfPlanets()
 solarSystem.planets
 
 //min 32 - mutabilidad
+
+
+//Properties - Ownership - Strong and weak - private and public
+// Ownership and memory management ARC
+// class are allocated and initialized
+class Legs {
+    var count: Int = 0 //Strong reference
+}
+
+class Animal {
+    var name: String = ""    //Strong reference
+    var legs: Legs = Legs()  //Strong reference
+}
+
+class LegVet {
+    weak var legs: Legs? = nil
+}
+
+// reference to an Animal
+// referenced by one
+let dog = Animal()
+let vet = LegVet()
+
+vet.legs = dog.legs
+
+
 
