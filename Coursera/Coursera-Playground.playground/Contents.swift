@@ -177,6 +177,7 @@ print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"--
 
 ///////////////////////////////////////////
 // w2.2.1 functions - inouts and references
+// performace - do not copy - pass by reference
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
         for j in 0 ..< imageMatrix[i].count {//how many elements in the i array
@@ -302,6 +303,18 @@ let arrayFive = [Int]()
 ////////////////////////////////////////////////////////////////////////////////////
 
 // w3.1 Optional types - swift is a type safe language
+//
+// Optional is a type, is defined as a enum 
+// because "enum" can have associated values
+//
+// enum Optional{
+//    case None
+//    case Some(T)
+//}
+//
+// Swift - nil is the absence of a value, not a pointer
+// Objective-C nil is a pointer to a nonexistent object
+//
 // - Similar to using "nil" with pointers in Objective-c,
 // - They work for any type, not just classes
 // - an optional value either contains a value or contains nil.
@@ -498,4 +511,103 @@ enum Suit: String
     case Spade = "s"
     case Club = "c"
 }
+
+
+struct Planet {
+    var name: String!
+    var description: String!
+    
+    init(name:String, description:String)
+    {
+        self.name = name
+        self.description = description
+    }
+}
+
+enum SomePlanetarySystems : String
+{
+    case Solar = "Solar"
+    case Gliese = "Gliese 876"
+    case Cancri = "55 Cancri"
+    case Kepler = "Kepler-42"
+}
+
+let solarSystemPlanets: Dictionary = [
+    "Mercury": "A very hot planet, closest to the sun.",
+    "Venus": "It's very cloudy here!",
+    "Earth": "There is something very familiar about this planet.",
+    "Mars": "Known as the red planet.",
+    "Jupiter": "A gas giant, with a noticeable red spot.",
+    "Saturn": "This planet has beautiful rings around it.",
+    "Uranus": "Strangely, this planet rotates around on its side.",
+    "Neptune": "A very cold planet, furthest from the sun."
+]
+
+class PlanetarySystem {
+    var planets: [Planet] = []
+    var name: String = ""
+    
+    init(planetaySystemName:SomePlanetarySystems)
+    {
+        switch planetaySystemName {
+        case .Solar:
+            name = planetaySystemName.rawValue
+            planets = setArrayOfPlanets(solarSystemPlanets, planetarySystemName: .Solar)
+        case .Gliese:
+            self.planets = []
+        case .Cancri:
+            self.planets = []
+        case .Kepler:
+            self.planets = []
+        }
+    }
+    
+    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+    {
+        var planets = [Planet]()
+        for (planetName,description) in solarSystemPlanets {
+            planets.append(Planet(name: planetName, description: description))
+        }
+        return planets
+    }
+    
+    func amountOfPlanets() -> Int
+    {
+        return planets.count
+    }
+}
+
+//Public and Private 
+let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
+solarSystem.name
+solarSystem.amountOfPlanets()
+solarSystem.planets
+
+//min 32 - mutabilidad
+
+
+//Properties - Ownership - Strong and weak - private and public
+// Ownership and memory management ARC
+// class are allocated and initialized
+class Legs {
+    var count: Int = 0 //Strong reference
+}
+
+class Animal {
+    var name: String = ""    //Strong reference
+    var legs: Legs = Legs()  //Strong reference
+}
+
+class LegVet {
+    weak var legs: Legs? = nil
+}
+
+// reference to an Animal
+// referenced by one
+let dog = Animal()
+let vet = LegVet()
+
+vet.legs = dog.legs
+
+
 
