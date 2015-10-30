@@ -1,7 +1,9 @@
 //: Playground - noun: a place where people can play
 
+import Cocoa
 import Foundation
-import UIKit
+
+//: Playground - noun: a place where people can play
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Week 2
@@ -43,7 +45,7 @@ let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
 ///////////////////////////////////////////
 //w2.2 Control flow - intervals - guard
 for i in 0..<10{
-    //guard as a break 
+    //guard as a break
     //guard as a assert
     guard (i != 2) else { continue }
     if i != 5 {
@@ -134,7 +136,7 @@ func ouncesToGrams(ounces: Float = 0) -> Float
 ouncesToGrams(1)
 
 ///////////////////////////////////////////
-// w2.1.2 Functions & switch 
+// w2.1.2 Functions & switch
 
 
 ///////////////////////////////////////////
@@ -253,23 +255,23 @@ let magicPrintFunction = printMagic
 
 
 ///////////////////////////////////////////
-// switch case 
+// switch case
 // "patter matching"
-// - we can match aginst integers, strings, a range, a tuple, or an enumeration. 
+// - we can match aginst integers, strings, a range, a tuple, or an enumeration.
 
 var vegetable = "red pepper"
 //vegetable = "cucumber"
 //vegetable = "watercress"
 
 switch vegetable {
-    case "celery":                         //pm - string
-        print("celery case")
-    case "cucumber", "watercress":         //pm -
-        print("cucu and water")
-    case let x where x.hasSuffix("pepper")://pm -
-        print("Is it a spicy \(x)")
-    default:
-        print("Everything taste good in soup")
+case "celery":                         //pm - string
+    print("celery case")
+case "cucumber", "watercress":         //pm -
+    print("cucu and water")
+case let x where x.hasSuffix("pepper")://pm -
+    print("Is it a spicy \(x)")
+default:
+    print("Everything taste good in soup")
 }
 
 //Quiz w2
@@ -299,12 +301,12 @@ let arrayFour:[Int] = []
 let arrayFive = [Int]()
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Week 3 Advanced Swift 
+// Week 3 Advanced Swift
 ////////////////////////////////////////////////////////////////////////////////////
 
 // w3.1 Optional types - swift is a type safe language
 //
-// Optional is a type, is defined as a enum 
+// Optional is a type, is defined as a enum
 // because "enum" can have associated values
 //
 // enum Optional{
@@ -326,9 +328,9 @@ let arrayFive = [Int]()
 // 1) "!" it brings a value, unwrap automatically
 //    - could fail if value is nil and we are not prepare
 //    - used when we know it's going to be nil at the begining
-// like a property 
+// like a property
 // 2) "?" we don't know, so unwrap manually (is it nil? is an optional, unwrap yourself)
-//    - f value is nil, just keep going 
+//    - f value is nil, just keep going
 
 var str: String? = nil //it is nil at the begining
 str
@@ -337,10 +339,10 @@ print(str == nil)
 
 ///////////////////////////////////////////
 // Fourced Unwrapping
-// safe unwrapping 
+// safe unwrapping
 if (str != nil) { //make it safe
     str!.characters.count //this means "str is not nil! unwrap it"
-                          //! force unwrap - if unwrap an it is nil - crash
+    //! force unwrap - if unwrap an it is nil - crash
 }
 
 ///////////////////////////////////////////
@@ -353,7 +355,7 @@ if let definitelyString = str {
 }
 
 ///////////////////////////////////////////
-// Optional binding and guard as assertion 
+// Optional binding and guard as assertion
 func testingOptionalBindingWithGuard(maybeString: String?) -> String
 {
     //guard as an assertion
@@ -362,13 +364,14 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
     return definitelyString
 }
 
+
 ///////////////////////////////////////////
 // 9:50/25:25 Implicitly unwrapped optional
 // "!" used when
 // - I get a value from Objective-C - everything is a pointer/optional nil/obj
 // always going to be an optional
 // obj-C returns something as an optional
-// but I don't want to deal with it as an optional 
+// but I don't want to deal with it as an optional
 // then I unwrap it, no matter what (I need to know what it is)
 //
 // useful in interfaces (known to be bound)
@@ -378,9 +381,9 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
 var mostLikelystring: String! //only nil at when declared = "Hey"
 // from here I don't neet to do an optional binding or force unwrapping
 mostLikelystring = "This is a string"
-mostLikelystring.characters.count //unwrapped used as it wasn't an optional 
+mostLikelystring.characters.count //unwrapped used as it wasn't an optional
 
-// 14:33/25:25 Optional chaining 
+// 14:33/25:25 Optional chaining
 
 class CupHolder {
     var cups:[String]?
@@ -456,7 +459,7 @@ aNumber.n
 
 //// Inheritance
 //class SupperNumber: NSNumber {
-//    override 
+//    override
 //}
 
 ///////////////////////////////////////////
@@ -479,7 +482,7 @@ enum CompassPoint
 }
 
 var directionToHead = CompassPoint.East //type CompassPoint
-directionToHead = .North //type inferred, then use short syntax 
+directionToHead = .North //type inferred, then use short syntax
 
 ///////////////////////////////////////////
 //Enumeratons and optionals
@@ -577,7 +580,7 @@ class PlanetarySystem {
     }
 }
 
-//Public and Private 
+//Public and Private
 let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
 solarSystem.name
 solarSystem.amountOfPlanets()
@@ -608,6 +611,7 @@ let dog = Animal()
 let vet = LegVet()
 
 vet.legs = dog.legs
+
 
 
 
