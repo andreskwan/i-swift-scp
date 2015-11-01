@@ -417,13 +417,12 @@ let firstCup = niceCar.cupHolders?.cups?[0]
 
 ///////////////////////////////////////////
 // value types - by value by reference
-//by value
+//by value - copy
 var a = 6
 var b = a
 b = 8
 b
 a
-
 
 struct StructNumber {
     var n: Int
@@ -431,17 +430,17 @@ struct StructNumber {
         self.n = n
     }
 }
-var aStructNum = StructNumber(n: 56)
+var aStructNum = StructNumber(n: 8)
 var bStructNum = aStructNum
 
 aStructNum.n
-bStructNum.n = 88
+bStructNum.n = 106
 bStructNum.n
 aStructNum.n
 // Structs are not ARC
 
 ///////////////////////////////////////////
-//by reference
+//by reference - pointer
 class Number {
     var n: Int
     init(n: Int){
@@ -472,6 +471,7 @@ aNumber.n
 
 ///////////////////////////////////////////
 // Enumerations
+///////////////////////////////////////////
 
 enum CompassPoint
 {
@@ -507,6 +507,8 @@ let error = Result.Error(0, "You miss it!")
 ///////////////////////////////////////////
 // Enum - raw values - associated values
 // each raw value should be unique
+
+// enum types
 enum Suit: String
 {
     case Heart = "H"
@@ -515,6 +517,11 @@ enum Suit: String
     case Club = "c"
 }
 
+Suit.Club
+Suit.Diamond
+
+var cardSuit = Suit.Diamond
+cardSuit
 
 struct Planet {
     var name: String!
@@ -580,7 +587,9 @@ class PlanetarySystem {
     }
 }
 
+///////////////////////////////////////////
 //Public and Private
+// one file doesn't allow "access control"
 let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
 solarSystem.name
 solarSystem.amountOfPlanets()
@@ -588,29 +597,126 @@ solarSystem.planets
 
 //min 32 - mutabilidad
 
-
+///////////////////////////////////////////
 //Properties - Ownership - Strong and weak - private and public
 // Ownership and memory management ARC
 // class are allocated and initialized
-class Legs {
+// class Legs { // is "internal" by default
+// - only can be accessed by entities in the same file
+public class Legs {
     var count: Int = 0 //Strong reference
 }
 
+// If animal is dealocated so its legs
 class Animal {
-    var name: String = ""    //Strong reference
-    var legs: Legs = Legs()  //Strong reference
+    
 }
 
-class LegVet {
-    weak var legs: Legs? = nil
+class Mammal: Animal {
+    
+}
+
+class Carnivore: Mammal {
+    
+}
+
+class Feline: Carnivore {
+    
+}
+
+class Canine: Carnivore {
+
+}
+
+// what makes a Lion a Lion? 
+// roar
+// hair
+// color
+// size
+// herd
+class Lion: Feline {
+    var name: String = ""    //Strong reference
+    var legs: Legs = Legs()  //Strong reference - the animal own its legs
+    // Property observers and computed properties
+    // - a property that depends on another property
+    var uppercaseName: String {
+        get{
+            return name.uppercaseString
+        }
+        set{
+            name = newValue.uppercaseString
+        }
+    }
+}
+
+// legVet don't own the legs - when deallocated - legs are not deallocated
+public class LegVet {
+    // "weak" attribute - does not increase reference counting
+    public weak var legs: Legs? = nil
 }
 
 // reference to an Animal
 // referenced by one
-let dog = Animal()
+// let dog = Animal() can't be deallocated!!! I need "var" here
+// "nil" can't be assigned to type "Animal"
+// so it should be an "optional Animal"
+var dog:Lion? = Lion()
+dog?.uppercaseName = "Paco"
+dog?.legs.count = 4
+dog?.name
+
 let vet = LegVet()
 
-vet.legs = dog.legs
+// if dog is deallocated vet.legs now are nill
+// is not nil yet, if in the future I'll change this
+vet.legs = dog?.legs
+// when I want to use "nil" I need to start to use optionals ?
+// this "nil" force me to add "?" everywhere
+dog = nil
+
+vet.legs = dog?.legs
+
+
+
+///////////////////////////////////////////
+// Inheritance - overriding - what about abstract and concrete classes???
+
+class SuperNumber: NSNumber {
+    override func getValue(value: UnsafeMutablePointer<Void>) {
+        super.getValue(value)
+    }
+}
+extension NSNumber {
+    func superCoolGetter() -> Int {
+        return 5
+    }
+}
+
+let n = NSNumber(int: 4)
+n.superCoolGetter()
+
+///////////////////////////////////////////
+// Protocols or interfaces
+
+protocol danceble {
+    func dance()
+}
+
+// instead of use inheritance, use composition (interface or protocol)
+class Person: danceble {
+    func dance() {
+    }
+}
+
+extension NSNumber: danceble {
+    func superEvilNumber() -> Int {
+        return 666
+    }
+    func dance() {
+        
+    }
+}
+
 
 
 
