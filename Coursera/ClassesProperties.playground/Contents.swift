@@ -385,8 +385,26 @@ mostLikelystring.characters.count //unwrapped used as it wasn't an optional
 
 // 14:33/25:25 Optional chaining
 
+///////////////////////////////////////////
+// Classes
+// default values & initializers
+
 class CupHolder {
     var cups:[String]?
+    var pepino: String?
+    required init(cups:[String],pepino:String){
+        self.cups = cups
+        self.pepino = pepino
+    }
+    
+    convenience init() {
+        self.init(cups:[],pepino:"")
+    }
+    
+    // dealloc
+    deinit {
+        
+    }
 }
 
 class Car {
@@ -394,6 +412,7 @@ class Car {
 }
 
 let niceCar = Car()
+//niceCar.cupHolders = CupHolder(cups: [], pepino: "")
 niceCar.cupHolders = CupHolder()
 niceCar.cupHolders?.cups
 
@@ -522,7 +541,44 @@ Suit.Diamond
 
 var cardSuit = Suit.Diamond
 cardSuit
+var cardSuitValue = Suit.Diamond.rawValue
 
+enum TypeOfVeggies: Int {
+    case Carrots = 1
+    case Tomatoes
+}
+
+var veggieValue = TypeOfVeggies.Tomatoes.rawValue
+veggieValue = 100
+
+enum HealtyVeggies: String {
+    case Carrots
+    case Tomatoes
+}
+
+var tomatoes = HealtyVeggies.Tomatoes
+tomatoes
+tomatoes.rawValue
+
+func eatVeggies(veggie: HealtyVeggies) -> String{
+    return veggie.rawValue
+}
+
+eatVeggies(HealtyVeggies.Tomatoes)
+
+let veggie = HealtyVeggies(rawValue: "Lead")
+// I need to unwrap veggie
+if let veg = veggie {
+    eatVeggies(veg)
+}
+
+let carrot = HealtyVeggies(rawValue: "pepino")
+let bunnieMeal = carrot?.rawValue
+
+let whatsForDinner = eatVeggies(.Carrots)
+
+///////////////////////////////////////////
+// Globant
 struct Planet {
     var name: String!
     var description: String!
@@ -716,6 +772,7 @@ extension NSNumber: danceble {
         
     }
 }
+
 
 
 

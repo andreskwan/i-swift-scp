@@ -7,3 +7,36 @@
 //
 
 import Foundation
+
+class City {
+    let name: String
+    let population: Int
+    
+    init(name: String, population: Int){
+        self.name = name
+        self.population = population
+    }
+}
+
+class Country {
+    let name: String
+    let cities: [City]
+    
+    init(name: String, cities: [City]){
+        self.name = name
+        self.cities = cities
+    }
+    
+    //is quite clear that the function might
+    //return nil
+    func findCityWithName(name: String) -> City? {
+        for city in cities {
+            //here compares the value
+            //value type
+            if city.name == name {
+                return city
+            }
+        }
+        return nil
+    }
+}
