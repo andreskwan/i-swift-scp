@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *name;
 // store in a variable
 @property (nonatomic, assign) NSInteger population;
-
+@property (nonatomic, strong, readonly) UTCity *cityWithLargestPopulation;
 - (instancetype)initWithName:(NSString *)name population:(NSInteger) population;
 
 @end
