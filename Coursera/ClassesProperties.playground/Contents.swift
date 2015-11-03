@@ -729,8 +729,7 @@ vet.legs = dog?.legs
 // when I want to use "nil" I need to start to use optionals ?
 // this "nil" force me to add "?" everywhere
 dog = nil
-
-vet.legs = dog?.legs
+    vet.legs = dog?.legs
 
 
 
@@ -772,9 +771,3 @@ extension NSNumber: danceble {
         
     }
 }
-
-
-
-
-
-

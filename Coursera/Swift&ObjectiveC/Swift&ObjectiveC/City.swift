@@ -21,26 +21,7 @@ class City {
 class Country {
     let name: String
     let cities: [City]
-    
-    init(name: String, cities: [City]){
-        self.name = name
-        self.cities = cities
-    }
-    
-    //is quite clear that the function might
-    //return nil
-    func findCityWithName(name: String) -> City? {
-        for city in cities {
-            //here compares the value
-            //value type
-            if city.name == name {
-                return city
-            }
-        }
-        return nil
-    }
-    
-    // Calculated propertie
+
     var cityWithLargestPopulation: City {
         var maxPopulation: Int = 0
         var largestCity: City = cities[0]
@@ -52,4 +33,21 @@ class Country {
         }
         return largestCity
     }
+    
+    init(name: String, cities: [City]){
+        self.name = name
+        self.cities = cities
+    }
+    
+    func findCityWithName(name: String) -> City? {
+        for city in cities {
+            //here compares the value
+            //value type
+            if city.name == name {
+                return city
+            }
+        }
+        return nil
+    }
+    
 }
