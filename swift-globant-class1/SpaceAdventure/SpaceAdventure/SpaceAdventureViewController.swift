@@ -13,6 +13,7 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var answer: UITextField!
     
     var keyBoardHeight: CGFloat!
+    var planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,6 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         textField.text = ""
     }
     func textFieldDidEndEditing(textField: UITextField) {
-//        (textField.text?.isEmpty != true)
         if let text = textField.text {
             switch text {
                 case "YES":

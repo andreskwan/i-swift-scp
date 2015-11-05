@@ -46,13 +46,14 @@ class PlanetarySystem {
         }
     }
     
-    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+    func setArrayOfPlanets(dictOfPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
     {
         var planets = [Planet]()
-        for (planetName,description) in solarSystemPlanets {
-            planets.append(Planet(name: planetName, description: description))
-        }
-        return planets
+        planets = dictOfPlanets.map(
+            {(planetName,planetDescription) -> Planet in
+                return Planet(name: planetName, description: planetDescription)
+        })
+        return planets;
     }
     
     func amountOfPlanets() -> Int
