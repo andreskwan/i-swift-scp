@@ -2,6 +2,9 @@
 
 import Cocoa
 
+///////////////////////////////////////////
+// Globant - Assignment 1
+
 enum SomePlanetarySystems : String
 {
     case Solar = "Solar"
@@ -74,13 +77,14 @@ class PlanetarySystem {
         }
     }
 
-    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
+    func setArrayOfPlanets(dictOfPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
     {
         var planets = [Planet]()
-        for (planetName,description) in solarSystemPlanets {
-            planets.append(Planet(name: planetName, description: description))
-        }
-        return planets
+         planets = dictOfPlanets.map(
+            {(planetName,planetDescription) -> Planet in
+                return Planet(name: planetName, description: planetDescription)
+            })
+        return planets;
     }
     
     func amountOfPlanets() -> Int
@@ -89,10 +93,15 @@ class PlanetarySystem {
     }
 }
 
+///////////////////////////////////////////
+//Public and Private
+// one file doesn't allow "access control"
 let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
 solarSystem.name
+solarSystem.amountOfPlanets()
 solarSystem.planets
 
+//min 32 - mutabilidad
 
 
 

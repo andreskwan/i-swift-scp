@@ -28,7 +28,7 @@ let solarSystemPlanets: Dictionary = [
 ]
 
 class PlanetarySystem {
-    var planets: [Planet] = []
+    var planets = [Planet]()
     var name: String = ""
     
     init(planetaySystemName:SomePlanetarySystems)

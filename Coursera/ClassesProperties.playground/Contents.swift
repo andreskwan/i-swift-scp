@@ -29,6 +29,12 @@ var maxAmplitudeFound = AudioSample.min
 
 ///////////////////////////////////////////
 // String interpolation formating
+// is a way to construct a new String value from a mix of constants, variables, literals
+//    an expressions by including their values inside a string literal. Each item that you 
+//    insert into the string literal is wrapped in a pair of parentheses, prefixed by a 
+//    backslash
+// https://www.weheartswift.com/higher-order-functions-map-filter-reduce-and-more/
+
 let kotherConstant = "\(kLabel) \(kWidth)"
 
 let kDouble = 90.0
@@ -74,19 +80,28 @@ array.dropFirst()
 sequenceArray.dropLast(3)//last three elements
 //abs(-1)
 
+///////////////////////////////////////////
+// map
+let arrayMapModified = animals.map({animal in "\(animal) is cute!"})
+arrayMapModified
 
 ///////////////////////////////////////////
 // Dictionaries
 //- add key value
 
-var cuteness = ["dog": "funny",
-    "cat": "very cute",
-    "bird": "amazing"];
+var animalCuteness = ["dogs": "funny",
+    "cats": "very cute",
+    "birds": "amazing"];
 
-cuteness["Panda"]="Extra cute"
-cuteness
+animalCuteness["Pandas"]="Extra cute"
+animalCuteness
 
 var namesOfIntegers: [String: Int] = ["One": 1 ,"Two": 2,"Three": 3]
+
+///////////////////////////////////////////
+// Dictionaries and map 
+let arrayFromDictionary = animalCuteness.map({(animalSpecie,cuteness) in "\(animalSpecie) are \(cuteness)"})
+arrayFromDictionary
 
 ///////////////////////////////////////////
 // Dictionaries and optionals
@@ -274,7 +289,9 @@ default:
     print("Everything taste good in soup")
 }
 
+///////////////////////////////////////////
 //Quiz w2
+///////////////////////////////////////////
 //p2.1
 let x = 1
 
@@ -576,82 +593,6 @@ let carrot = HealtyVeggies(rawValue: "pepino")
 let bunnieMeal = carrot?.rawValue
 
 let whatsForDinner = eatVeggies(.Carrots)
-
-///////////////////////////////////////////
-// Globant
-struct Planet {
-    var name: String!
-    var description: String!
-    
-    init(name:String, description:String)
-    {
-        self.name = name
-        self.description = description
-    }
-}
-
-enum SomePlanetarySystems : String
-{
-    case Solar = "Solar"
-    case Gliese = "Gliese 876"
-    case Cancri = "55 Cancri"
-    case Kepler = "Kepler-42"
-}
-
-let solarSystemPlanets: Dictionary = [
-    "Mercury": "A very hot planet, closest to the sun.",
-    "Venus": "It's very cloudy here!",
-    "Earth": "There is something very familiar about this planet.",
-    "Mars": "Known as the red planet.",
-    "Jupiter": "A gas giant, with a noticeable red spot.",
-    "Saturn": "This planet has beautiful rings around it.",
-    "Uranus": "Strangely, this planet rotates around on its side.",
-    "Neptune": "A very cold planet, furthest from the sun."
-]
-
-class PlanetarySystem {
-    var planets: [Planet] = []
-    var name: String = ""
-    
-    init(planetaySystemName:SomePlanetarySystems)
-    {
-        switch planetaySystemName {
-        case .Solar:
-            name = planetaySystemName.rawValue
-            planets = setArrayOfPlanets(solarSystemPlanets, planetarySystemName: .Solar)
-        case .Gliese:
-            self.planets = []
-        case .Cancri:
-            self.planets = []
-        case .Kepler:
-            self.planets = []
-        }
-    }
-    
-    func setArrayOfPlanets(systemPlanets:[String:String],planetarySystemName:SomePlanetarySystems) -> [Planet]
-    {
-        var planets = [Planet]()
-        for (planetName,description) in solarSystemPlanets {
-            planets.append(Planet(name: planetName, description: description))
-        }
-        return planets
-    }
-    
-    func amountOfPlanets() -> Int
-    {
-        return planets.count
-    }
-}
-
-///////////////////////////////////////////
-//Public and Private
-// one file doesn't allow "access control"
-let solarSystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
-solarSystem.name
-solarSystem.amountOfPlanets()
-solarSystem.planets
-
-//min 32 - mutabilidad
 
 ///////////////////////////////////////////
 //Properties - Ownership - Strong and weak - private and public
