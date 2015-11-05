@@ -98,5 +98,42 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
             self.view.frame = CGRectOffset(self.view.frame, 0, movement)
         })
     }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        var replacedAnEmoji = false
+        var emojiStringRange: NSRange
+        
+        // Construct the text that will be in the field if this change is accepted
+        var newText = textField.text! as NSString
+        newText = newText.stringByReplacingCharactersInRange(range, withString: string)
+        
+        // For each dictionary entry in translations, pull out a string to search for
+        // and an emoji to replace it with
+        
+        for (emojiString, emoji) in translations {
+            
+            // Search for all occurances of key (ie. "dog"), and replace with emoji (ie. 🐶)
+            repeat {
+                emojiStringRange = newText.rangeOfString(emojiString, options: NSStringCompareOptions.CaseInsensitiveSearch)
+                
+                // found one
+                if emojiStringRange.location != NSNotFound {
+                    newText = newText.stringByReplacingCharactersInRange(emojiStringRange, withString: emoji)
+                    replacedAnEmoji = true
+                }
+                
+            } while emojiStringRange.location != NSNotFound
+        }
+        
+        // If we have replaced an emoji, then we directly edit the text field
+        // Otherwise we allow the proposed edit.
+        if replacedAnEmoji {
+            textField.text = newText as String
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
