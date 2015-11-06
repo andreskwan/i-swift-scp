@@ -99,36 +99,47 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
+//    this method is called everytime we insert a single letter - YES
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
-        var replacedAnEmoji = false
+        // flag
+        var wasIdentified = false
+        
         var emojiStringRange: NSRange
         
         // Construct the text that will be in the field if this change is accepted
         var newText = textField.text! as NSString
+        
         newText = newText.stringByReplacingCharactersInRange(range, withString: string)
         
         // For each dictionary entry in translations, pull out a string to search for
         // and an emoji to replace it with
+        let translations = ["YES","NO"]
         
-        for (emojiString, emoji) in translations {
+        for emojiString in translations {
             
             // Search for all occurances of key (ie. "dog"), and replace with emoji (ie. 🐶)
             repeat {
+                //
                 emojiStringRange = newText.rangeOfString(emojiString, options: NSStringCompareOptions.CaseInsensitiveSearch)
-                
-                // found one
-                if emojiStringRange.location != NSNotFound {
-                    newText = newText.stringByReplacingCharactersInRange(emojiStringRange, withString: emoji)
-                    replacedAnEmoji = true
+                print("New text: \(newText) vs String: \(emojiString) \n Length: \(emojiStringRange.length), Location: \(emojiStringRange.location)")
+                if emojiStringRange.length <= 3 {
+                    // found one
+                    if emojiStringRange.location != NSNotFound {
+                        //aqui debe lanzar
+                        newText = newText.stringByReplacingCharactersInRange(emojiStringRange, withString: "\u{E052}")
+                        wasIdentified = true
+                    }
+                } else {
+                    "Sorry, I didn't get that. Please answer YES or NO.   "
+                    newText = "Wrong!"
                 }
-                
             } while emojiStringRange.location != NSNotFound
         }
         
         // If we have replaced an emoji, then we directly edit the text field
         // Otherwise we allow the proposed edit.
-        if replacedAnEmoji {
+        if wasIdentified {
             textField.text = newText as String
             return false
         } else {
