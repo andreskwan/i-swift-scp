@@ -11,8 +11,8 @@
 		A6D2387C1BD88B50007EE1C9 /* SpaceAdventureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D2387B1BD88B50007EE1C9 /* SpaceAdventureViewController.swift */; };
 		A6D2387F1BD88B50007EE1C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6D2387D1BD88B50007EE1C9 /* Main.storyboard */; };
 		A6D238811BD88B50007EE1C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6D238801BD88B50007EE1C9 /* Assets.xcassets */; };
-		EA6A9AA61BDF9B7800C419A1 /* PlanetarySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A9AA51BDF9B7800C419A1 /* PlanetarySystem.swift */; settings = {ASSET_TAGS = (); }; };
-		EA9BB0261BDF2D00009B4039 /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BB0251BDF2D00009B4039 /* Planets.swift */; settings = {ASSET_TAGS = (); }; };
+		EA6A9AA61BDF9B7800C419A1 /* PlanetarySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A9AA51BDF9B7800C419A1 /* PlanetarySystem.swift */; };
+		EA9BB0261BDF2D00009B4039 /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BB0251BDF2D00009B4039 /* Planets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +98,7 @@
 				TargetAttributes = {
 					A6D238751BD88B50007EE1C9 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = UG88X33WHR;
 					};
 				};
 			};
@@ -244,6 +245,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SpaceAdventure/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Globant.SpaceAdventure;
@@ -256,6 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SpaceAdventure/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Globant.SpaceAdventure;

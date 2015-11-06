@@ -49,18 +49,6 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.text = ""
     }
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let text = textField.text {
-            switch text {
-                case "YES":
-                    print("yes")
-                case "NO":
-                    print("no")
-                default:
-                    print("Sorry, I didn't get that. Please answer YES or NO.   ")
-            }
-        }
-    }
     
     // MARK: Keyboard
     func subscribeToKeyboardNotifications() {
@@ -102,49 +90,53 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
 //    this method is called everytime we insert a single letter - YES
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
-        // flag
-        var wasIdentified = false
-        
-        var emojiStringRange: NSRange
+        var answerStringRange: NSRange
         
         // Construct the text that will be in the field if this change is accepted
-        var newText = textField.text! as NSString
+        var newAnswer = textField.text! as NSString
         
-        newText = newText.stringByReplacingCharactersInRange(range, withString: string)
+        newAnswer = newAnswer.stringByReplacingCharactersInRange(range, withString: string)
         
         // For each dictionary entry in translations, pull out a string to search for
         // and an emoji to replace it with
         let translations = ["YES","NO"]
         
-        for emojiString in translations {
-            
-            // Search for all occurances of key (ie. "dog"), and replace with emoji (ie. 🐶)
+        for actualString in translations {
             repeat {
-                //
-                emojiStringRange = newText.rangeOfString(emojiString, options: NSStringCompareOptions.CaseInsensitiveSearch)
-                print("New text: \(newText) vs String: \(emojiString) \n Length: \(emojiStringRange.length), Location: \(emojiStringRange.location)")
-                if emojiStringRange.length <= 3 {
+                answerStringRange = newAnswer.rangeOfString(actualString, options: NSStringCompareOptions.CaseInsensitiveSearch)
+                print("New Answer: \(newAnswer) length : \(newAnswer.length) \n String: \(actualString) \n Length: \(answerStringRange.length), Location: \(answerStringRange.location)")
+                if newAnswer.length <= 3 {
                     // found one
-                    if emojiStringRange.location != NSNotFound {
+                    if answerStringRange.location != NSNotFound {
                         //aqui debe lanzar
-                        newText = newText.stringByReplacingCharactersInRange(emojiStringRange, withString: "\u{E052}")
-                        wasIdentified = true
+                        newAnswer = newAnswer.stringByReplacingCharactersInRange(answerStringRange, withString: "\u{E052}")
+                        textField.text = newAnswer as String
+                        return true
                     }
                 } else {
-                    "Sorry, I didn't get that. Please answer YES or NO.   "
-                    newText = "Wrong!"
+                    newAnswer = ""
+                    textField.text = newAnswer as String
+                    
+                    textField.resignFirstResponder()
+                    
+                    //1 controller for alert
+                    let alert = UIAlertController(title: "Wrong Answer", message: "Sorry, I didn't get that. Please answer YES or NO.", preferredStyle: UIAlertControllerStyle.Alert)
+
+                    //2 action for alert
+                    let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    })
+                    
+                    //3 add action to the alert controller 
+                    alert.addAction(defaultAction)
+                    
+                    //4 present the alert
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    return false
                 }
-            } while emojiStringRange.location != NSNotFound
+            } while answerStringRange.location != NSNotFound
         }
-        
-        // If we have replaced an emoji, then we directly edit the text field
-        // Otherwise we allow the proposed edit.
-        if wasIdentified {
-            textField.text = newText as String
-            return false
-        } else {
-            return true
-        }
+       return true
     }
 }
 
