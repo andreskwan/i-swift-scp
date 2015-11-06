@@ -98,7 +98,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="answer" destination="ypI-b9-1NP" id="4do-GC-NMY"/>
-                        <segue destination="h1V-sG-frM" kind="show" identifier="VisitPLanet" id="zcX-f4-Q4N"/>
+                        <segue destination="h1V-sG-frM" kind="show" identifier="VisitPlanet" id="zcX-f4-Q4N"/>
                         <segue destination="tJD-ee-2nG" kind="show" identifier="ViewPlanetarySystem" id="vZG-AS-uPo"/>
                     </connections>
                 </viewController>
@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="1170.5" y="-2.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Planetary System View Controller-->
         <scene sceneID="Yzo-aI-Lae">
             <objects>
-                <tableViewController id="tJD-ee-2nG" sceneMemberID="viewController">
+                <tableViewController id="tJD-ee-2nG" customClass="PlanetarySystemViewController" customModule="SpaceAdventure" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" id="ujj-uu-85M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.050980392156862744" green="0.0" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlanetTableViewCell" rowHeight="103" id="SBa-dv-8Lb">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PlanetCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlanetTableViewCell" rowHeight="103" id="SBa-dv-8Lb" customClass="PlanetTableViewCell" customModule="SpaceAdventure" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SBa-dv-8Lb" id="jtd-FP-xp7">
@@ -158,6 +158,8 @@ description</string>
                                 <animations/>
                                 <color key="backgroundColor" red="0.050980392156862744" green="0.0" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="labelPlanetDescription" destination="8YX-ah-P0t" id="0ca-eb-U8z"/>
+                                    <outlet property="labelPlanetName" destination="7d2-O9-Mrd" id="ibX-ml-Lxh"/>
                                     <segue destination="h1V-sG-frM" kind="show" id="8KE-sc-M0s"/>
                                 </connections>
                             </tableViewCell>
@@ -173,10 +175,10 @@ description</string>
             </objects>
             <point key="canvasLocation" x="1659.5" y="527.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome Planet View Controller-->
         <scene sceneID="0Tf-QO-kkX">
             <objects>
-                <viewController id="h1V-sG-frM" sceneMemberID="viewController">
+                <viewController id="h1V-sG-frM" customClass="WelcomePlanetViewController" customModule="SpaceAdventure" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6aq-3P-bug"/>
                         <viewControllerLayoutGuide type="bottom" id="jAY-jD-mnp"/>
@@ -205,6 +207,9 @@ description</string>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="labelWelcomePlanet" destination="HpK-Hp-xqw" id="DWZ-xu-HOD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1X-7b-EPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -231,6 +236,6 @@ description</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zcX-f4-Q4N"/>
+        <segue reference="8KE-sc-M0s"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,12 +8,22 @@
 
 import UIKit
 
+
+enum validAnswer:String {
+    case YES = "YES"
+    case NO = "NO"
+}
+
 class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
-    
     @IBOutlet weak var answer: UITextField!
+
+    let kSegueIdentifierVisitPlanet = "VisitPlanet"
+    let kSegueIdentifierListoOfPlanets = "ViewPlanetarySystem"
+    let translations = ["YES","NO"]
     
     var keyBoardHeight: CGFloat!
     var planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
+    var nameOfRamdomPlanet: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,16 +37,15 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBarHidden = true
-        subscribeToKeyboardNotifications()
+//        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBarHidden = false
-                unsubscribeFromKeyBoardNotifications()
+//                unsubscribeFromKeyBoardNotifications()
     }
-
-    override func didReceiveMemoryWarning() {
+     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -51,43 +60,57 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Keyboard
-    func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    func unsubscribeFromKeyBoardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
-    }
-    func keyboardWillShow(notification: NSNotification) {
-        if answer.isFirstResponder() {
-            keyBoardHeight = getKeyboardHeight(notification)
-            if keyBoardHeight != 0 {
-                animateTextField(true)
-            }
+//    func subscribeToKeyboardNotifications() {
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+//    }
+//    func unsubscribeFromKeyBoardNotifications() {
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
+//    }
+//    func keyboardWillShow(notification: NSNotification) {
+//        if answer.isFirstResponder() {
+//            keyBoardHeight = getKeyboardHeight(notification)
+//            if keyBoardHeight != 0 {
+//                animateTextField(true)
+//            }
+//        }
+//    }
+//    func keyboardWillHide(notification: NSNotification) {
+//        if answer.isFirstResponder() && keyBoardHeight != nil {
+//            animateTextField(false)
+//        }
+//    }
+//    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+//        if let userInfo = notification.userInfo {
+//            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+//                return keyboardSize.height
+//            }
+//        }
+//        return 0
+//    }
+//    func animateTextField(up: Bool) {
+//        let movement = (up ? -keyBoardHeight : keyBoardHeight)
+//        UIView.animateWithDuration(0.3, animations: {
+//            self.view.frame = CGRectOffset(self.view.frame, 0, movement)
+//        })
+//    }
+    
+    
+    // MARK: present other views
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case kSegueIdentifierVisitPlanet:
+                let controller = segue.destinationViewController as! WelcomePlanetViewController
+                controller.planetName = "Pepino"//self.nameOfRamdomPlanet
+        case kSegueIdentifierListoOfPlanets:
+                let controller = segue.destinationViewController as! PlanetarySystemViewController
+                controller.planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
+        default: break
         }
-    }
-    func keyboardWillHide(notification: NSNotification) {
-        if answer.isFirstResponder() && keyBoardHeight != nil {
-            animateTextField(false)
-        }
-    }
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
-                return keyboardSize.height
-            }
-        }
-        return 0
-    }
-    func animateTextField(up: Bool) {
-        let movement = (up ? -keyBoardHeight : keyBoardHeight)
-        UIView.animateWithDuration(0.3, animations: {
-            self.view.frame = CGRectOffset(self.view.frame, 0, movement)
-        })
     }
     
-//    this method is called everytime we insert a single letter - YES
+    // MARK: TextFieldDelegate - Methods
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
         var answerStringRange: NSRange
@@ -99,7 +122,7 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         
         // For each dictionary entry in translations, pull out a string to search for
         // and an emoji to replace it with
-        let translations = ["YES","NO"]
+
         
         for actualString in translations {
             repeat {
@@ -108,10 +131,13 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
                 if newAnswer.length <= 3 {
                     // found one
                     if answerStringRange.location != NSNotFound {
-                        //aqui debe lanzar
-                        newAnswer = newAnswer.stringByReplacingCharactersInRange(answerStringRange, withString: "\u{E052}")
-                        textField.text = newAnswer as String
-                        return true
+                        if newAnswer == validAnswer.YES.rawValue {
+                            //TODO: obtain a name of a planet randomly
+                            performSegueWithIdentifier(kSegueIdentifierVisitPlanet, sender: self)
+                        } else {
+                            performSegueWithIdentifier(kSegueIdentifierListoOfPlanets, sender: self)
+                        }
+                       return true
                     }
                 } else {
                     newAnswer = ""
