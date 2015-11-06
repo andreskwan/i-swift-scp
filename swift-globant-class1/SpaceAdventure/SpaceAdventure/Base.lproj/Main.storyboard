@@ -178,7 +178,7 @@ description</string>
         <!--Welcome Planet View Controller-->
         <scene sceneID="0Tf-QO-kkX">
             <objects>
-                <viewController id="h1V-sG-frM" customClass="WelcomePlanetViewController" customModule="SpaceAdventure" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomePlanetIdentifier" id="h1V-sG-frM" customClass="WelcomePlanetViewController" customModule="SpaceAdventure" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6aq-3P-bug"/>
                         <viewControllerLayoutGuide type="bottom" id="jAY-jD-mnp"/>

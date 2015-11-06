@@ -12,6 +12,7 @@ import UIKit
 class PlanetarySystemViewController: UITableViewController {
     var planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
     let kCellIdentier = "PlanetTableViewCell"
+    let kViewControllerIdentifier = "WelcomePlanetIdentifier"
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,5 +28,12 @@ class PlanetarySystemViewController: UITableViewController {
         cell.labelPlanetName.text = planetarySystem.planets[indexPath.row].name
         cell.labelPlanetDescription.text = planetarySystem.planets[indexPath.row].description
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as!WelcomePlanetViewController
+        welcomeVC.planetName = planetarySystem.planets[indexPath.row].name
+        self.presentViewController(welcomeVC, animated: true, completion: nil)
     }
 }
