@@ -32,8 +32,8 @@ class PlanetarySystemViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as!WelcomePlanetViewController
+        let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as! WelcomePlanetViewController
         welcomeVC.planetName = planetarySystem.planets[indexPath.row].name
-        self.presentViewController(welcomeVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
 }
