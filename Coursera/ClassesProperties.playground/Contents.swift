@@ -66,6 +66,7 @@ for i in 0..<10{
 
 ///////////////////////////////////////////
 // Arrays
+//
 var numbers = Array<Int>(count: 5, repeatedValue: 3)
 var numbers2 = [Int](count: 3, repeatedValue: 8)
 
@@ -193,7 +194,7 @@ print("largest value: \(largest) belongs to the kind: \(actualKind)")
 print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"----", terminator:"**--**")
 
 ///////////////////////////////////////////
-// w2.2.1 functions - inouts and references
+// w2.2.1 functions - inouts pass by reference
 // performace - do not copy - pass by reference
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
@@ -279,14 +280,14 @@ var vegetable = "red pepper"
 //vegetable = "watercress"
 
 switch vegetable {
-case "celery":                         //pm - string
-    print("celery case")
-case "cucumber", "watercress":         //pm -
-    print("cucu and water")
-case let x where x.hasSuffix("pepper")://pm -
-    print("Is it a spicy \(x)")
-default:
-    print("Everything taste good in soup")
+    case "celery":                         //pm - string
+        print("celery case")
+    case "cucumber", "watercress":         //pm -
+        print("cucu and water")
+    case let x where x.hasSuffix("pepper")://pm -
+        print("Is it a spicy \(x)")
+    default:
+        print("Everything taste good in soup")
 }
 
 ///////////////////////////////////////////
@@ -460,6 +461,7 @@ b = 8
 b
 a
 
+//by reference
 struct StructNumber {
     var n: Int
     init(n: Int){
@@ -712,3 +714,25 @@ extension NSNumber: danceble {
         
     }
 }
+
+///////////////////////////////////////////
+// Property observes - called every time a property's value is set 
+// Observers
+// willSet - value before change
+// didSet  - value after change
+class StepCounter {
+    var totalSteps: Int = 0 {
+        willSet(newValue) {
+            print("About to set totalSteps to \(newValue)")
+        }
+        didSet {
+            print("Added \(totalSteps - oldValue) steps")
+        }
+    }
+}
+
+let steps = StepCounter()
+steps.totalSteps = 5
+steps
+
+
