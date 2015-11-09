@@ -9,17 +9,20 @@
 import UIKit
 
 
-enum validAnswer:String {
+enum ValidAnswers:String {
     case YES = "YES"
     case NO = "NO"
+}
+
+enum SegueIdentifiers: String {
+    case VisitPlanet   = "VisitPlanet"
+    case ListOfPlanets = "ViewPlanetarySystem"
 }
 
 class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var answer: UITextField!
 
-    let kSegueIdentifierVisitPlanet = "VisitPlanet"
-    let kSegueIdentifierListOfPlanets = "ViewPlanetarySystem"
-
+    
     let translations = ["YES","NO"]
     
     var keyBoardHeight: CGFloat!
@@ -52,10 +55,10 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     // MARK: present other views
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
-        case kSegueIdentifierVisitPlanet:
+        case SegueIdentifiers.VisitPlanet.rawValue:
                 let controller = segue.destinationViewController as! WelcomePlanetViewController
                 controller.planetName = "Pepino"//self.nameOfRamdomPlanet
-        case kSegueIdentifierListOfPlanets:
+        case SegueIdentifiers.ListOfPlanets.rawValue:
                 let controller = segue.destinationViewController as! PlanetarySystemViewController
                 controller.planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
         default: break
@@ -79,16 +82,15 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         for actualString in translations {
             repeat {
                 answerStringRange = newAnswer.rangeOfString(actualString, options: NSStringCompareOptions.CaseInsensitiveSearch)
-                print("New Answer: \(newAnswer) length : \(newAnswer.length) \n String: \(actualString) \n Length: \(answerStringRange.length), Location: \(answerStringRange.location)")
                 if newAnswer.length < 4 {
                     // found one
                     if answerStringRange.location != NSNotFound {
                         textField.text = newAnswer as String
-                        if newAnswer == validAnswer.YES.rawValue {
+                        if newAnswer == ValidAnswers.YES.rawValue {
                             //TODO: obtain a name of a planet randomly
-                            performSegueWithIdentifier(kSegueIdentifierVisitPlanet, sender: self)
+                            performSegueWithIdentifier(SegueIdentifiers.VisitPlanet.rawValue, sender: self)
                         } else {
-                            performSegueWithIdentifier(kSegueIdentifierListOfPlanets, sender: self)
+                            performSegueWithIdentifier(SegueIdentifiers.ListOfPlanets.rawValue, sender: self)
                         }
                         //hide keyboard
                         textField.resignFirstResponder()
@@ -99,25 +101,30 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
                     textField.text = newAnswer as String
                     
                     textField.resignFirstResponder()
-                    
-                    //1 controller for alert
-                    let alert = UIAlertController(title: "Wrong Answer", message: "Sorry, I didn't get that. Please answer YES or NO.", preferredStyle: UIAlertControllerStyle.Alert)
 
-                    //2 action for alert
-                    let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
-                    })
-                    
-                    //3 add action to the alert controller 
-                    alert.addAction(defaultAction)
-                    
-                    //4 present the alert
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    presentAlertControllerWithOkAction("Wrong Answer" , message: "Sorry, I didn't get that. Please answer YES or NO.", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     return false
                 }
             } while answerStringRange.location != NSNotFound
         }
        return true
+    }
+    
+    // MARK: AlertController
+    func presentAlertControllerWithOkAction(title: String, message: String, preferredStyle: UIAlertControllerStyle){
+        //1 controller for alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        
+        //2 action for alert
+        let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+        })
+        
+        //3 add action to the alert controller
+        alert.addAction(defaultAction)
+        
+        //4 present the alert
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: Keyboard

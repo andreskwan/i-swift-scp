@@ -11,6 +11,7 @@ import Foundation
 struct Planet {
     var name: String!
     var description: String!
+    var timeFromEarth: Double?
     
     init(name:String, description:String)
     {

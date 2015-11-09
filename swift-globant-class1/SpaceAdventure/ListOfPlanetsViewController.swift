@@ -23,7 +23,6 @@ class PlanetarySystemViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //cell identifier
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentier, forIndexPath: indexPath) as! PlanetTableViewCell
         cell.labelPlanetName.text = planetarySystem.planets[indexPath.row].name
         cell.labelPlanetDescription.text = planetarySystem.planets[indexPath.row].description

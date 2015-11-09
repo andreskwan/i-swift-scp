@@ -275,6 +275,8 @@ let magicPrintFunction = printMagic
 // "patter matching"
 // - we can match aginst integers, strings, a range, a tuple, or an enumeration.
 
+
+// Against a string
 var vegetable = "red pepper"
 //vegetable = "cucumber"
 //vegetable = "watercress"
@@ -545,6 +547,8 @@ let error = Result.Error(0, "You miss it!")
 ///////////////////////////////////////////
 // Enum - raw values - associated values
 // each raw value should be unique
+// - You can define Swift enumerations to store associated values of any given type, 
+//   and the value types can be different for each case of the enumeration if needed.
 
 // enum types
 enum Suit: String
