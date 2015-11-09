@@ -160,7 +160,6 @@ description</string>
                                 <connections>
                                     <outlet property="labelPlanetDescription" destination="8YX-ah-P0t" id="0ca-eb-U8z"/>
                                     <outlet property="labelPlanetName" destination="7d2-O9-Mrd" id="ibX-ml-Lxh"/>
-                                    <segue destination="h1V-sG-frM" kind="show" id="8KE-sc-M0s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -235,7 +234,4 @@ description</string>
             <point key="canvasLocation" x="566" y="-2"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="8KE-sc-M0s"/>
-    </inferredMetricsTieBreakers>
 </document>
