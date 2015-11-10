@@ -14,6 +14,7 @@
 		C9392CFB1BED172F006C713C /* WelcomePlanet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9392CFA1BED172F006C713C /* WelcomePlanet.swift */; };
 		C9392CFD1BED4871006C713C /* ListOfPlanetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9392CFC1BED4871006C713C /* ListOfPlanetsViewController.swift */; };
 		C9392D011BED5A92006C713C /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9392D001BED5A92006C713C /* PlanetTableViewCell.swift */; };
+		C97FB30E1BF157C6008B139D /* AlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97FB30D1BF157C6008B139D /* AlertControllerExtension.swift */; };
 		EA6A9AA61BDF9B7800C419A1 /* PlanetarySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A9AA51BDF9B7800C419A1 /* PlanetarySystem.swift */; };
 		EA9BB0261BDF2D00009B4039 /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BB0251BDF2D00009B4039 /* Planets.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		C9392CFA1BED172F006C713C /* WelcomePlanet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePlanet.swift; sourceTree = "<group>"; };
 		C9392CFC1BED4871006C713C /* ListOfPlanetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListOfPlanetsViewController.swift; path = ../ListOfPlanetsViewController.swift; sourceTree = "<group>"; };
 		C9392D001BED5A92006C713C /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
+		C97FB30D1BF157C6008B139D /* AlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerExtension.swift; sourceTree = "<group>"; };
 		EA6A9AA51BDF9B7800C419A1 /* PlanetarySystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetarySystem.swift; sourceTree = "<group>"; };
 		EA9BB0251BDF2D00009B4039 /* Planets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +67,7 @@
 				A6D238791BD88B50007EE1C9 /* AppDelegate.swift */,
 				C9392CFF1BED4A77006C713C /* Model */,
 				C9392CFE1BED4A68006C713C /* ViewControllers */,
+				C97FB30F1BF1590B008B139D /* Extensions */,
 				A6D2387D1BD88B50007EE1C9 /* Main.storyboard */,
 				A6D238801BD88B50007EE1C9 /* Assets.xcassets */,
 				A6D238851BD88B50007EE1C9 /* Info.plist */,
@@ -90,6 +93,14 @@
 				EA6A9AA51BDF9B7800C419A1 /* PlanetarySystem.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		C97FB30F1BF1590B008B139D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C97FB30D1BF157C6008B139D /* AlertControllerExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +175,7 @@
 			files = (
 				C9392D011BED5A92006C713C /* PlanetTableViewCell.swift in Sources */,
 				A6D2387C1BD88B50007EE1C9 /* SpaceAdventureViewController.swift in Sources */,
+				C97FB30E1BF157C6008B139D /* AlertControllerExtension.swift in Sources */,
 				C9392CFD1BED4871006C713C /* ListOfPlanetsViewController.swift in Sources */,
 				EA6A9AA61BDF9B7800C419A1 /* PlanetarySystem.swift in Sources */,
 				A6D2387A1BD88B50007EE1C9 /* AppDelegate.swift in Sources */,

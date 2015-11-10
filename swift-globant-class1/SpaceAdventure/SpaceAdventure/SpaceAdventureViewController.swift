@@ -102,29 +102,14 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
                     
                     textField.resignFirstResponder()
 
-                    presentAlertControllerWithOkAction("Wrong Answer" , message: "Sorry, I didn't get that. Please answer YES or NO.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController.alertControllerWithOkAction("Wrong Answer", message: "Sorry, I didn't get that. Please answer YES or NO.", preferredStyle: UIAlertControllerStyle.Alert)
+                    self.presentViewController(alert, animated: true, completion: nil)
                     
                     return false
                 }
             } while answerStringRange.location != NSNotFound
         }
        return true
-    }
-    
-    // MARK: AlertController
-    func presentAlertControllerWithOkAction(title: String, message: String, preferredStyle: UIAlertControllerStyle){
-        //1 controller for alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        
-        //2 action for alert
-        let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
-        })
-        
-        //3 add action to the alert controller
-        alert.addAction(defaultAction)
-        
-        //4 present the alert
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: Keyboard

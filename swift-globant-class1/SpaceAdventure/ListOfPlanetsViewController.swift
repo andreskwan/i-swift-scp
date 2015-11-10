@@ -32,7 +32,21 @@ class PlanetarySystemViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as! WelcomePlanetViewController
-        welcomeVC.planetName = planetarySystem.planets[indexPath.row].name
+        let selectedPlanet = planetarySystem.planets[indexPath.row]
+        welcomeVC.planetName = selectedPlanet.name
+        let alert: UIAlertController
+        let title = "Travel Time"
+        let message: String
+        
+        if let tripTime = selectedPlanet.timeFromEarth {
+            message = "The estimated time to destination is \(tripTime)"
+        } else {
+            message = "Sorry, I can't provide an estimated time to dstination right now. Relax and ejoy the trip."
+        }
+        
+        alert = UIAlertController.alertControllerWithOkAction(title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        self.presentViewController(alert, animated: true, completion: nil)        
         self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
 }
