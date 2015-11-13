@@ -11,6 +11,7 @@ import UIKit
 
 extension UIAlertController {
     static func alertControllerWithOkAction(title: String, message: String, preferredStyle: UIAlertControllerStyle) -> UIAlertController {
+                
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
         })

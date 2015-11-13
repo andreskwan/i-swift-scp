@@ -34,7 +34,7 @@ class PlanetarySystemViewController: UITableViewController {
         let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as! WelcomePlanetViewController
         let selectedPlanet = planetarySystem.planets[indexPath.row]
         welcomeVC.planetName = selectedPlanet.name
-        let alert: UIAlertController
+
         let title = "Travel Time"
         let message: String
         
@@ -44,9 +44,15 @@ class PlanetarySystemViewController: UITableViewController {
             message = "Sorry, I can't provide an estimated time to dstination right now. Relax and ejoy the trip."
         }
         
-        alert = UIAlertController.alertControllerWithOkAction(title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+            self.navigationController?.pushViewController(welcomeVC, animated: true)
+        })
+        alert.addAction(defaultAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+
+
         
-        self.presentViewController(alert, animated: true, completion: nil)        
-        self.navigationController?.pushViewController(welcomeVC, animated: true)
+
     }
 }
