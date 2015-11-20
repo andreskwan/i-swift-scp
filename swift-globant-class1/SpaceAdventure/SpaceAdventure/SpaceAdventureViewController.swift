@@ -12,6 +12,7 @@ import UIKit
 enum ValidAnswers:String {
     case YES = "YES"
     case NO = "NO"
+    static let allValues = [YES,NO]
 }
 
 enum SegueIdentifiers: String {
@@ -22,9 +23,6 @@ enum SegueIdentifiers: String {
 class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var answer: UITextField!
 
-    
-    let translations = ["YES","NO"]
-    
     var keyBoardHeight: CGFloat!
     var planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
     var nameOfRamdomPlanet: String!
@@ -57,7 +55,7 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         switch segue.identifier! {
         case SegueIdentifiers.VisitPlanet.rawValue:
                 let controller = segue.destinationViewController as! WelcomePlanetViewController
-                controller.planetName = "Pepino"//self.nameOfRamdomPlanet
+                controller.planetName = "Planet"//self.nameOfRamdomPlanet
         case SegueIdentifiers.ListOfPlanets.rawValue:
                 let controller = segue.destinationViewController as! PlanetarySystemViewController
                 controller.planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
@@ -79,9 +77,9 @@ class SpaceAdventureViewController: UIViewController, UITextFieldDelegate {
         var newAnswer = textField.text! as NSString
         newAnswer = newAnswer.stringByReplacingCharactersInRange(range, withString: string)
         
-        for actualString in translations {
+        for actualString in ValidAnswers.allValues {
             repeat {
-                answerStringRange = newAnswer.rangeOfString(actualString, options: NSStringCompareOptions.CaseInsensitiveSearch)
+                answerStringRange = newAnswer.rangeOfString(actualString.rawValue, options: NSStringCompareOptions.CaseInsensitiveSearch)
                 if newAnswer.length < 4 {
                     // found one
                     if answerStringRange.location != NSNotFound {

@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+enum AlertStrings: String {
+    case title = "Travel Time"
+    case estimatedTime = "The estimated time to destination is "
+    case noTime = "Sorry, I can't provide an estimated time to destination right now. \nRelax and ejoy the trip."
+    case actionTitle = "Ok"
+}
+
 class PlanetarySystemViewController: UITableViewController {
     var planetarySystem = PlanetarySystem(planetaySystemName: SomePlanetarySystems.Solar)
     let kCellIdentier = "PlanetTableViewCell"
@@ -34,19 +41,22 @@ class PlanetarySystemViewController: UITableViewController {
         let welcomeVC = storyboard.instantiateViewControllerWithIdentifier(kViewControllerIdentifier) as! WelcomePlanetViewController
         let selectedPlanet = planetarySystem.planets[indexPath.row]
         welcomeVC.planetName = selectedPlanet.name
-        let alert: UIAlertController
-        let title = "Travel Time"
+
+        let title = AlertStrings.title.rawValue
         let message: String
         
         if let tripTime = selectedPlanet.timeFromEarth {
-            message = "The estimated time to destination is \(tripTime)"
+            message = AlertStrings.estimatedTime.rawValue + "\(tripTime)"
         } else {
-            message = "Sorry, I can't provide an estimated time to dstination right now. Relax and ejoy the trip."
+            message = AlertStrings.noTime.rawValue
         }
         
-        alert = UIAlertController.alertControllerWithOkAction(title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let defaultAction = UIAlertAction(title: AlertStrings.actionTitle.rawValue, style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+            self.navigationController?.pushViewController(welcomeVC, animated: true)
+        })
+        alert.addAction(defaultAction)
         self.presentViewController(alert, animated: true, completion: nil)        
-        self.navigationController?.pushViewController(welcomeVC, animated: true)
+
     }
 }
