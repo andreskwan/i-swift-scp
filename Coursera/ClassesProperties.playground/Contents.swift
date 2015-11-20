@@ -2,54 +2,97 @@
 
 import Cocoa
 import Foundation
+//import UIKit
 
 //: Playground - noun: a place where people can play
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Week 2
+//: # Week 2
 ////////////////////////////////////////////////////////////////////////////////////
 // swift tour - book
-// let and var
+//: ## let and var
 
 ///////////////////////////////////////////
-// type inference
+//: ### type inference
 let kLabel = "the width is "
 let kWidth = 90
 
 ///////////////////////////////////////////
-// type annotation
-// casting to string
+//: ### type annotation
+//: #### casting to string
 let kWidthLabel: String = kLabel + String(kWidth)
 
 ///////////////////////////////////////////
-// Type aliases
-// define an alternative name for an existing type
+//: ### Type aliases
+//: #### define an alternative name for an existing type
 typealias AudioSample = UInt16
 var maxAmplitudeFound = AudioSample.min
 
-///////////////////////////////////////////
-// String interpolation formating
+
+//: # Strings
+
+//: ## Defining Strings using string literals
+let myFirstString = "mo 💰"
+let mySecondString = "mo problems"
+
+//: ## String concatenation
+let theTruth = myFirstString + ", " + mySecondString
+
+//: ## Emoji characters
+//: ### bring the emoji keyboard by ctrl+command+space bar
+let similarTruth = "💰can't buy me 💖"
+
+
+//: ## String interpolation
 // is a way to construct a new String value from a mix of constants, variables, literals
-//    an expressions by including their values inside a string literal. Each item that you 
-//    insert into the string literal is wrapped in a pair of parentheses, prefixed by a 
+//    an expressions by including their values inside a string literal. Each item that you
+//    insert into the string literal is wrapped in a pair of parentheses, prefixed by a
 //    backslash
 // https://www.weheartswift.com/higher-order-functions-map-filter-reduce-and-more/
 
 let kotherConstant = "\(kLabel) \(kWidth)"
+//: ### Plain string
+var doggyDiet = "Lulu eats 25lbs of dog food per month"
+//: ### String with variables
+var dogName = "Ferris"
+//var ferrisPic = UIImage(named:"SpringerdoodleFerris.jpg")!
+doggyDiet = "\(dogName) eats 25lbs of dog food per month"
 
+//: ### String with variables and expression
+var lbsPerDay = 0.75
+var daysPerMonth:Double = 30.0
+doggyDiet = "\(dogName) eats \(lbsPerDay) of dog food per month"
+
+//var frankiePic = UIImage(named:"frankie.jpeg")!
+lbsPerDay = 0.25
+dogName = "Lil Frankie"
+doggyDiet = "\(dogName) eats \(lbsPerDay) of dog food per month"
+//: ### String interpolation and operations
 let kDouble = 90.0
 let kSecondDouble = 88.0
-
-///////////////////////////////////////////
-// String and operations
 let kDoubleMessage = "\(kDouble)/\(kSecondDouble) = \(kDouble/kSecondDouble)"
 
-///////////////////////////////////////////
-//w2.1 Playground
-// see optionals w3.1
+
+//: ## A String isn't just a String
+
+//: ### A String is an Array of Characters
+var password = "Meet me in St. Louis"
+for character in password.characters {
+    if character == "e" {
+        print("found an e!")
+    } else {
+    }
+}
+
+//: ### A String can be treated as an NSString
+let newPassword = password.stringByReplacingOccurrencesOfString("e", withString: "3")
 
 ///////////////////////////////////////////
-//w2.2 Control flow - intervals - guard
+//: ## w2.1 Playground
+//: ### see optionals w3.1
+
+///////////////////////////////////////////
+//: ## w2.2 Control flow - intervals - guard
 for i in 0..<10{
     //guard as a break
     //guard as a assert
@@ -61,11 +104,11 @@ for i in 0..<10{
 
 
 ///////////////////////////////////////////
-//w2.3 Collections - Arrays & Dictionaries - or Generics
-// all collections are "value type" - duplication if inout not used
+//: ## w2.3 Collections - Arrays & Dictionaries - or Generics
+//: #### all collections are "value type" - duplication if inout not used
 
 ///////////////////////////////////////////
-// Arrays
+//: ### Arrays
 //
 var numbers = Array<Int>(count: 5, repeatedValue: 3)
 var numbers2 = [Int](count: 3, repeatedValue: 8)
@@ -82,12 +125,12 @@ sequenceArray.dropLast(3)//last three elements
 //abs(-1)
 
 ///////////////////////////////////////////
-// map
+//: #### map - array function
 let arrayMapModified = animals.map({animal in "\(animal) is cute!"})
 arrayMapModified
 
 ///////////////////////////////////////////
-// Dictionaries
+//: ### Dictionaries
 //- add key value
 
 var animalCuteness = ["dogs": "funny",
@@ -100,7 +143,7 @@ animalCuteness
 var namesOfIntegers: [String: Int] = ["One": 1 ,"Two": 2,"Three": 3]
 
 ///////////////////////////////////////////
-// Dictionaries and map 
+//: #### Dictionaries and map 
 let arrayFromDictionary = animalCuteness.map({(animalSpecie,cuteness) in "\(animalSpecie) are \(cuteness)"})
 arrayFromDictionary
 
@@ -120,7 +163,7 @@ namesOfIntegers.removeValueForKey("Ten")
 namesOfIntegers
 
 ///////////////////////////////////////////
-//Create empty arrays or dictionaries
+//: ## Create empty arrays or dictionaries
 let emptyArray = [String]()
 let emptyDictionary = [String:Float]()
 emptyArray
@@ -129,7 +172,7 @@ emptyDictionary
 let emptyArray2:[String]
 let emptyDictionary2:[String:Float]
 
-// an alterntive when type information can be inferred
+//: ### an alterntive when type information can be inferred
 emptyArray2 = []
 emptyDictionary2 = [:]
 
@@ -720,10 +763,10 @@ extension NSNumber: danceble {
 }
 
 ///////////////////////////////////////////
-// Property observes - called every time a property's value is set 
-// Observers
-// willSet - value before change
-// didSet  - value after change
+//: ## Property observes - called every time a property's value is set
+//: ### Observers
+//: ### willSet - value before change
+//: ### didSet  - value after change
 class StepCounter {
     var totalSteps: Int = 0 {
         willSet(newValue) {
