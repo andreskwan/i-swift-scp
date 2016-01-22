@@ -1,7 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import Cocoa
-import Foundation
+//import Foundation
 //import UIKit
 
 //: Playground - noun: a place where people can play
@@ -13,23 +13,27 @@ import Foundation
 //: ## let and var
 
 ///////////////////////////////////////////
-//: ### type inference
+//: ### variables - type inference
 let kLabel = "the width is "
 let kWidth = 90
 
 ///////////////////////////////////////////
-//: ### type annotation
+//: ### variables - type annotation
 //: #### casting to string
 let kWidthLabel: String = kLabel + String(kWidth)
 
 ///////////////////////////////////////////
-//: ### Type aliases
+//: ### Variables - Type aliases
 //: #### define an alternative name for an existing type
 typealias AudioSample = UInt16
 var maxAmplitudeFound = AudioSample.min
 
+//: ### Types - everything is a agregate type (enum, struct or class)
+//: #### Convertions among types - we need initializers
+let answer = Double(42) //From Int to Double
 
-//: # Strings
+///////////////////////////////////////////
+//: # Strings is a collection!!! array of characters
 
 //: ## Defining Strings using string literals
 let myFirstString = "mo 💰"
@@ -44,10 +48,11 @@ let similarTruth = "💰can't buy me 💖"
 
 
 //: ## String interpolation
-// is a way to construct a new String value from a mix of constants, variables, literals
-//    an expressions by including their values inside a string literal. Each item that you
-//    insert into the string literal is wrapped in a pair of parentheses, prefixed by a
-//    backslash
+// is a way to construct a new String value from a mix of:
+// constants, variables, literals an expressions by
+//    including their values inside a string literal. 
+// Each item that you insert into the string literal 
+// is wrapped in a pair of parentheses, prefixed by a backslash
 // https://www.weheartswift.com/higher-order-functions-map-filter-reduce-and-more/
 
 let kotherConstant = "\(kLabel) \(kWidth)"
@@ -107,6 +112,25 @@ for i in 0..<10{
 //: ## w2.3 Collections - Arrays & Dictionaries - or Generics
 //: #### all collections are "value type" - duplication if inout not used
 
+
+///////////////////////////////////////////
+//: ### Tuples
+let tuplas: (String, Int)
+tuplas = ("8",8)
+print(tuplas)
+
+// is just a string
+// just store data - like CGPoint - structures - not associated methods
+let tuplina = ("hola")
+print(tuplina)
+
+// empty tuple
+let tuplaVacia = ()
+print(tuplaVacia)
+
+///////////////////////////////////////////
+//: ### Tuples - Patern matching 
+
 ///////////////////////////////////////////
 //: ### Arrays
 //
@@ -148,9 +172,9 @@ let arrayFromDictionary = animalCuteness.map({(animalSpecie,cuteness) in "\(anim
 arrayFromDictionary
 
 ///////////////////////////////////////////
-// Dictionaries and optionals
-// Because it is possible to request a key for which no value exists, a dictionary’s
-// subscript returns an optional value of the dictionary’s value type.
+//: ### Dictionaries and optionals
+//: #### Because it is possible to request a key for which no value exists, a dictionary’s
+//: #### subscript returns an optional value of the dictionary’s value type.
 
 namesOfIntegers["Four"]   //return "nil"
 namesOfIntegers["Four"] = 4
@@ -177,15 +201,15 @@ emptyArray2 = []
 emptyDictionary2 = [:]
 
 ///////////////////////////////////////////
-//w2. Functions
+//: ## w2. Functions
 ///////////////////////////////////////////
-// functions - Parameters
-// let - parameters are constants by default
-// var - value type - parameters are copies and can be modified
-// inout - reference type - parameters passed by reference - is the value - take care
+//: ###  functions - Parameters
+//: #### let - parameters are constants by default
+//: #### var - value type - parameters are copies and can be modified
+//: #### inout - reference type - parameters passed by reference - is the value - take care
 
 ///////////////////////////////////////////
-// functions - Default parameter values
+//: ## functions - Default parameter values
 let gramInOunces:Float = 0.035274
 func ouncesToGrams(ounces: Float = 0) -> Float
 {
@@ -199,7 +223,7 @@ ouncesToGrams(1)
 
 
 ///////////////////////////////////////////
-// w2.2 For(control flow)
+//: ## w2.2 For(control flow)
 
 for i in 0...3{
     print(i)
@@ -213,7 +237,7 @@ var beatifulImage = [[200,3,100],[100,200,4],[25,6,100]]
 print(beatifulImage)
 
 ///////////////////////////////////////////
-// For - Iterating a dictionary
+//: ## For - Iterating a dictionary
 let interestingNumbers: [String:[Int]] = [
     "Prime": [2, 3, 5, 7, 11, 13],
     "Fibonacci": [1, 1, 2, 3, 5, 8],
@@ -237,7 +261,7 @@ print("largest value: \(largest) belongs to the kind: \(actualKind)")
 print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"----", terminator:"**--**")
 
 ///////////////////////////////////////////
-// w2.2.1 functions - inouts pass by reference
+//: ## w2.2.1 functions - inouts pass by reference
 // performace - do not copy - pass by reference
 func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
     for i in 0 ..< imageMatrix.count {//how many arrays in the imageMatrix
@@ -251,7 +275,7 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
 riseLowerValues(&beatifulImage, value: 50)
 
 ///////////////////////////////////////////
-// functions - return multiple values - Tuples - compound values
+//: ## functions - return multiple values - Tuples - compound values
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
@@ -282,8 +306,8 @@ var coordinates2 = (lat: 54.2667,lon: 8.4833)
 print("latitud is \(coordinates2.lat)")
 
 ///////////////////////////////////////////
-//w3 function - Closures
-//named function
+//: ## w3 function - Closures
+//: ### named function
 func performMagic(thingy: String) -> String {
     return thingy
 }
@@ -292,13 +316,16 @@ let magicFunction = performMagic
 magicFunction("Abra Cadabra")
 
 ///////////////////////////////////////////
-//defining an anonymous function
-let newMagicFuntion = {
+//: ### defining an anonymous function
+let newMagicFunction = {
     (thingy:String) -> String in //function signature
     return thingy
 }
 
+newMagicFunction("Dissapear")
+
 let magicFunctionReturn = performMagic("Spell")
+magicFunctionReturn
 
 func printMagic(thingy: String) {
     print(thingy)
@@ -310,13 +337,13 @@ let magicPrintFunction = printMagic
 //printFunctionReturn
 
 ///////////////////////////////////////////
-// functions - variable number of arguments
+//: ## functions - variable number of arguments
 
 
 ///////////////////////////////////////////
-// switch case
+//: ## switch case
 // "patter matching"
-// - we can match aginst integers, strings, a range, a tuple, or an enumeration.
+// - we can match against integers, strings, a range, a tuple, or an enumeration.
 
 
 // Against a string
@@ -336,7 +363,7 @@ switch vegetable {
 }
 
 ///////////////////////////////////////////
-//Quiz w2
+//: ## Quiz w2
 ///////////////////////////////////////////
 //p2.1
 let x = 1
@@ -364,7 +391,7 @@ let arrayFour:[Int] = []
 let arrayFive = [Int]()
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Week 3 Advanced Swift
+//: ## Week 3 Advanced Swift
 ////////////////////////////////////////////////////////////////////////////////////
 
 // w3.1 Optional types - swift is a type safe language
@@ -401,7 +428,7 @@ str?.characters.count //this means "is str nil?" do not force unwrap - it is saf
 print(str == nil)
 
 ///////////////////////////////////////////
-// Fourced Unwrapping
+//: ##  Fourced Unwrapping
 // safe unwrapping
 if (str != nil) { //make it safe
     str!.characters.count //this means "str is not nil! unwrap it"
@@ -409,7 +436,7 @@ if (str != nil) { //make it safe
 }
 
 ///////////////////////////////////////////
-// Optional binding
+//: ## Optional binding
 //str = "Hello"
 if let definitelyString = str {
     definitelyString.characters.count
@@ -418,7 +445,7 @@ if let definitelyString = str {
 }
 
 ///////////////////////////////////////////
-// Optional binding and guard as assertion
+//: ## Optional binding and guard as assertion
 func testingOptionalBindingWithGuard(maybeString: String?) -> String
 {
     //guard as an assertion
@@ -429,7 +456,7 @@ func testingOptionalBindingWithGuard(maybeString: String?) -> String
 
 
 ///////////////////////////////////////////
-// 9:50/25:25 Implicitly unwrapped optional
+//: ## 9:50/25:25 Implicitly unwrapped optional
 // "!" used when
 // - I get a value from Objective-C - everything is a pointer/optional nil/obj
 // always going to be an optional
@@ -449,7 +476,7 @@ mostLikelystring.characters.count //unwrapped used as it wasn't an optional
 // 14:33/25:25 Optional chaining
 
 ///////////////////////////////////////////
-// Classes
+//: ## Classes
 // default values & initializers
 
 class CupHolder {
@@ -498,7 +525,7 @@ let firstCup = niceCar.cupHolders?.cups?[0]
 
 
 ///////////////////////////////////////////
-// value types - by value by reference
+//: ## value types - by value by reference
 //by value - copy
 var a = 6
 var b = a
@@ -545,7 +572,7 @@ aNumber.n
 //}
 
 ///////////////////////////////////////////
-// String vs NSString
+//: ## String vs NSString
 //var nsstring: NSString = "\U0001F496"
 //var string: String = "\U0001F496"
 //
@@ -782,4 +809,9 @@ let steps = StepCounter()
 steps.totalSteps = 5
 steps
 
+struct Animals {
+    var name: String = ""
+    var heightInches = 0.0
+    var heightCM:Double
+}
 
