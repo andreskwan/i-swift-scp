@@ -14,7 +14,21 @@ import Cocoa
 
 ///////////////////////////////////////////
 //: ### variables - type inference
-let kLabel = "the width is "
+//: #### var
+var size: Double = 40
+
+//: ##### Everything is an object
+size.isFinite
+size.isZero
+size.description
+Double.abs(size)
+
+//: ##### Conversiones 
+let int2Double = Double(42)
+let strInt = Int("")
+
+//: #### let
+let kLabel = "the width is pepe "
 let kWidth = 90
 
 ///////////////////////////////////////////
@@ -25,8 +39,13 @@ let kWidthLabel: String = kLabel + String(kWidth)
 ///////////////////////////////////////////
 //: ### Variables - Type aliases
 //: #### define an alternative name for an existing type
+
+//: ##### Typealias
 typealias AudioSample = UInt16
 var maxAmplitudeFound = AudioSample.min
+
+typealias Integer = Int
+var x1: Integer = 44
 
 //: ### Types - everything is a agregate type (enum, struct or class)
 //: #### Convertions among types - we need initializers
@@ -115,6 +134,19 @@ for i in 0..<10{
 
 ///////////////////////////////////////////
 //: ### Tuples
+//: #### (2-tuple)
+var pair = (1, "one")
+
+//: ##### access
+pair.0
+pair.1
+
+//: ##### tuplas types and protocols
+pair.0 = 88
+pair
+//pair.1 = 100
+pair.1 = "chechere"
+
 let tuplas: (String, Int)
 tuplas = ("8",8)
 print(tuplas)
@@ -133,14 +165,14 @@ print(tuplaVacia)
 
 ///////////////////////////////////////////
 //: ### Arrays
-//
+
 var numbers = Array<Int>(count: 5, repeatedValue: 3)
 var numbers2 = [Int](count: 3, repeatedValue: 8)
 
 var concatenatedArray = numbers + numbers2
 var sequenceArray = [Int](0...5)
 
-var animals = ["dog", "cat", "bird"]
+var animals = ["dog", "cat", "bird", 40]
 
 let array = [1,2,3]
 //dropFirst(array)
