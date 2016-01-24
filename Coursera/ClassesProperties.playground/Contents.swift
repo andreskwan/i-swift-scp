@@ -232,27 +232,6 @@ let emptyDictionary2:[String:Float]
 emptyArray2 = []
 emptyDictionary2 = [:]
 
-///////////////////////////////////////////
-//: ## w2. Functions
-///////////////////////////////////////////
-//: ###  functions - Parameters
-//: #### let - parameters are constants by default
-//: #### var - value type - parameters are copies and can be modified
-//: #### inout - reference type - parameters passed by reference - is the value - take care
-
-///////////////////////////////////////////
-//: ## functions - Default parameter values
-let gramInOunces:Float = 0.035274
-func ouncesToGrams(ounces: Float = 0) -> Float
-{
-    return Float(ounces)/Float(gramInOunces)
-}
-
-ouncesToGrams(1)
-
-///////////////////////////////////////////
-// w2.1.2 Functions & switch
-
 
 ///////////////////////////////////////////
 //: ## w2.2 For(control flow)
@@ -291,6 +270,44 @@ for (kind, numbers) in interestingNumbers {
 // Print
 print("largest value: \(largest) belongs to the kind: \(actualKind)")
 print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"----", terminator:"**--**")
+
+
+///////////////////////////////////////////
+//: ## w2. Functions
+///////////////////////////////////////////
+//: ###  functions - Parameters
+//: #### let - parameters are constants by default
+//: #### var - value type - parameters are copies and can be modified
+//: #### inout - reference type - parameters passed by reference - is the value - take care
+
+///////////////////////////////////////////
+//: Functions - Parameters
+
+// default behavior
+func h(internalNameOne:Int, internalNameTwo: Int) -> Int {
+    return internalNameOne * internalNameTwo
+}
+
+h(3, internalNameTwo:3)
+
+// parameter with external different name
+func hh(internalNameOne:Int, internalNameTwo:Int, externalNameThree internalNameThree:Int ) -> Int {
+    return (internalNameOne + internalNameTwo) * internalNameThree
+}
+
+hh(3, internalNameTwo:3, externalNameThree: 10)
+
+///////////////////////////////////////////
+//: ## functions - Default parameter values
+let gramInOunces:Float = 0.035274
+func ouncesToGrams(ounces: Float = 0) -> Float
+{
+    return Float(ounces)/Float(gramInOunces)
+}
+
+//default parameter
+ouncesToGrams()
+ouncesToGrams(1)
 
 ///////////////////////////////////////////
 //: ## w2.2.1 functions - inouts pass by reference
