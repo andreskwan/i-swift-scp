@@ -281,24 +281,48 @@ print(interestingNumbers["Prime"],interestingNumbers["Fibonacci"], separator:"--
 //: #### inout - reference type - parameters passed by reference - is the value - take care
 
 ///////////////////////////////////////////
-//: Functions - Parameters
+//: ### Functions - Internal and External Parameters Names
 
-// default behavior
+//: #### default behavior
 func h(internalNameOne:Int, internalNameTwo: Int) -> Int {
     return internalNameOne * internalNameTwo
 }
 
 h(3, internalNameTwo:3)
 
-// parameter with external different name
+//: ### parameter with external different name
 func hh(internalNameOne:Int, internalNameTwo:Int, externalNameThree internalNameThree:Int ) -> Int {
     return (internalNameOne + internalNameTwo) * internalNameThree
 }
 
 hh(3, internalNameTwo:3, externalNameThree: 10)
 
+//func hhh(#internalOne:Int, #internalTwo:Int, #internalThree:Int ) {
+//}
+
+
+
 ///////////////////////////////////////////
-//: ## functions - Default parameter values
+//: ### Functions naming
+// Naaaaah...
+func displayHintWithString(title: String) {}
+displayHintWithString("func1")
+
+// better but long
+func displayHintWithTitle(title: String) {}
+displayHintWithTitle("func2")
+
+// this is a clear way to name external parameters and function
+func displayHintWith(title title: String) {}
+displayHintWith(title: "funct3")
+
+
+
+
+
+
+///////////////////////////////////////////
+//: ### functions - Default parameter values
 let gramInOunces:Float = 0.035274
 func ouncesToGrams(ounces: Float = 0) -> Float
 {
@@ -308,6 +332,13 @@ func ouncesToGrams(ounces: Float = 0) -> Float
 //default parameter
 ouncesToGrams()
 ouncesToGrams(1)
+
+func addSuffixTo(string string: String, suffix: String = "ingly") -> String {
+    return string + suffix
+}
+
+addSuffixTo(string: "Mam")
+addSuffixTo(string: "Papi", suffix: "chulo")
 
 ///////////////////////////////////////////
 //: ## w2.2.1 functions - inouts pass by reference
@@ -324,7 +355,7 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
 riseLowerValues(&beatifulImage, value: 50)
 
 ///////////////////////////////////////////
-//: ## functions - return multiple values - Tuples - compound values
+//: ## functions - Return Types - Tuple multiple values - Tuples - compound values
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
