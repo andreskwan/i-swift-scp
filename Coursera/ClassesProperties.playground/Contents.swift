@@ -355,7 +355,8 @@ func riseLowerValues(inout imageMatrix: [[Int]], value: Int){
 riseLowerValues(&beatifulImage, value: 50)
 
 ///////////////////////////////////////////
-//: ## functions - Return Types - Tuple multiple values - Tuples - compound values
+//: ## functions - Returning Types - Tuple multiple values - Tuples - compound values
+
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
@@ -385,9 +386,58 @@ print("latitud is \(lat)")
 var coordinates2 = (lat: 54.2667,lon: 8.4833)
 print("latitud is \(coordinates2.lat)")
 
+// keepcoding
+// without names for returning
+func namesOfNumbers(a:Int) -> (Int, String, String){
+    var val: (Int, String, String)
+    
+    switch a {
+    case 1:
+        val = (1, "one", "uno")
+    case 2:
+        val = (2, "two", "dos")
+    default:
+        val = (3, "three", "tres")
+    }
+    return val
+}
+
+var (_, en, es) = namesOfNumbers(2)
+print("\(en), \(es)")
+
+///////////////////////////////////////////
+//: ## Functions - passing functions as parameters
+
+typealias IntToIntFunc = (Int) ->Int
+
+func apply(f:IntToIntFunc, n:Int) ->Int{
+    return f(n)
+}
+func doubler(a:Int) ->Int{
+    return a * 2
+}
+func add42(a:Int) ->Int{
+    return a + 42
+}
+apply(doubler, n: 42)
+apply(add42, n: 42)
+
+
+func compose(f:IntToIntFunc, g:IntToIntFunc) ->IntToIntFunc{
+    func comp(a:Int) ->Int{
+        return f(g(a))
+    }
+    return comp
+}
+var comp = compose(add42, g: doubler)
+comp(42)
+
+
 ///////////////////////////////////////////
 //: ## w3 function - Closures
 //: ### named function
+//: todas las funciones son closures
+
 func performMagic(thingy: String) -> String {
     return thingy
 }
