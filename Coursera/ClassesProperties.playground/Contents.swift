@@ -172,6 +172,8 @@ var numbers2 = [Int](count: 3, repeatedValue: 8)
 var concatenatedArray = numbers + numbers2
 var sequenceArray = [Int](0...5)
 
+//turns the animals swift Array to obj-c NSArray
+//to allow different kind of objects
 var animals = ["dog", "cat", "bird", 40]
 
 let array = [1,2,3]
@@ -190,8 +192,8 @@ arrayMapModified
 //- add key value
 
 var animalCuteness = ["dogs": "funny",
-    "cats": "very cute",
-    "birds": "amazing"];
+                      "cats": "very cute",
+                     "birds": "amazing"];
 
 animalCuteness["Pandas"]="Extra cute"
 animalCuteness
@@ -330,7 +332,7 @@ func ouncesToGrams(ounces: Float = 0) -> Float
 }
 
 //default parameter
-ouncesToGrams()
+ouncesToGrams() //using the default parameter value
 ouncesToGrams(1)
 
 func addSuffixTo(string string: String, suffix: String = "ingly") -> String {
@@ -430,7 +432,8 @@ func compose(f:IntToIntFunc, g:IntToIntFunc) ->IntToIntFunc{
     return comp
 }
 var comp = compose(add42, g: doubler)
-comp(42)
+comp(42)// comp type is (Int)->Int
+comp(2)
 
 
 ///////////////////////////////////////////
@@ -446,7 +449,7 @@ let magicFunction = performMagic
 magicFunction("Abra Cadabra")
 
 ///////////////////////////////////////////
-//: ### defining an anonymous function
+//: ### defining an anonymous function - closure
 let newMagicFunction = {
     (thingy:String) -> String in //function signature
     return thingy
@@ -463,11 +466,18 @@ func printMagic(thingy: String) {
 
 let magicPrintFunction = printMagic
 
+
+func g(a:Int) -> Int {
+    return a + 1
+}
+
 //let printFunctionReturn() = printMagic("Spell")
 //printFunctionReturn
 
 ///////////////////////////////////////////
 //: ## functions - variable number of arguments
+
+
 
 
 ///////////////////////////////////////////
